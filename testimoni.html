@@ -91,7 +91,7 @@
   footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
   .footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
 
-  .reveal{opacity:1;transform:none;}
+  .reveal { opacity: 1; transform: none; }
 
   @media(max-width:900px){
     nav,footer{padding-left:1.5rem;padding-right:1.5rem;}
@@ -473,4 +473,13 @@ function loadMoreWA() {
         }
       });
     }, { threshold: 0.05 });
-    els.forEach(function(e
+    els.forEach(function(e<script>
+  function loadMoreWA() {
+    var row2 = document.getElementById('waRow2');
+    var row3 = document.getElementById('waRow3');
+    var btn = document.getElementById('waLoadMore');
+    if (row2) { row2.style.display = 'grid'; row2.style.marginTop = '1.5rem'; }
+    if (row3) { row3.style.display = 'grid'; row3.style.marginTop = '1.5rem'; }
+    if (btn) { btn.style.display = 'none'; }
+  }
+</script>
