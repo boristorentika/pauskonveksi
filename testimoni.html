@@ -348,7 +348,7 @@
   </div>
 
   <!-- ROW 2 -->
-  <div class="wa-grid reveal" style="margin-top:1.5rem;">
+  <div class="wa-grid reveal wa-hidden" id="waRow2" style="margin-top:1.5rem;display:none;">
     <div class="wa-chat-card">
       <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#1a5276;">IH</div><div><div class="wa-chat-name">Ida Haryani</div><div class="wa-chat-company">APJATEL</div></div></div>
       <div class="wa-chat-body">
@@ -386,7 +386,7 @@
   </div>
 
   <!-- ROW 3 -->
-  <div class="wa-grid reveal" style="margin-top:1.5rem;">
+  <div class="wa-grid reveal wa-hidden" id="waRow3" style="margin-top:1.5rem;display:none;">
     <div class="wa-chat-card">
       <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#b7950b;">KD</div><div><div class="wa-chat-name">Kezhia Devi</div><div class="wa-chat-company">Bethesda Church</div></div></div>
       <div class="wa-chat-body">
@@ -427,6 +427,12 @@
     </div>
   </div>
 
+  <div id="waLoadMore" style="text-align:center;margin-top:2rem;">
+    <button onclick="loadMoreWA()" style="background:transparent;border:1px solid rgba(245,200,66,0.35);color:#F5C842;padding:0.75rem 2rem;font-size:0.82rem;font-family:inherit;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(245,200,66,0.1)'" onmouseout="this.style.background='transparent'">
+      Tampilkan 6 Chat Lainnya →
+    </button>
+  </div>
+
   <p class="wa-note reveal">Chat ditampilkan seizin klien · Nama ditampilkan sesuai persetujuan</p>
 </div>
 
@@ -445,7 +451,16 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-window.addEventListener('load', function() {
+function loadMoreWA() {
+    var row2 = document.getElementById('waRow2');
+    var row3 = document.getElementById('waRow3');
+    var btn = document.getElementById('waLoadMore');
+    if (row2) { row2.style.display = 'grid'; row2.style.marginTop = '1.5rem'; }
+    if (row3) { row3.style.display = 'grid'; row3.style.marginTop = '1.5rem'; }
+    if (btn) { btn.style.display = 'none'; }
+  }
+
+  window.addEventListener('load', function() {
   setTimeout(function() {
     var els = document.querySelectorAll('.reveal');
     var obs = new IntersectionObserver(function(entries) {
