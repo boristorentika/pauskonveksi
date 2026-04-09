@@ -42,6 +42,9 @@
   .nav-center .crumb:hover { opacity: 1; color: var(--gold-light); }
   .nav-center .crumb.active { opacity: 0.7; color: var(--cream); }
   .nav-center .crumb:last-child { opacity: 1; color: var(--gold); font-weight: 500; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
   .nav-cta { background: var(--gold); color: var(--navy); padding: 0.5rem 1.1rem; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; white-space: nowrap; flex-shrink: 0; margin-left: auto; }
   .nav-cta:hover { background: var(--gold-light); }
 
@@ -294,11 +297,15 @@
     </svg>
     <div class="nav-logo-text">Paus Konveksi</div>
   </a>
-  <div class="nav-center" id="breadcrumb">
-    <span class="crumb active" onclick="showLanding()">Katalog</span>
-    <span class="sep" id="sep2" style="display:none">›</span>
-    <span class="crumb active" id="crumb2" style="display:none"></span>
-  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Layanan</a></li>
+    <li><a href="katalog.html" class="active">Katalog</a></li>
+    <li><a href="index.html#portfolio">Portfolio</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="testimoni.html">Testimoni</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
   <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta" target="_blank">Konsultasi Gratis</a>
 </nav>
 
