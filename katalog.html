@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katalog Produk | Paus Konveksi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A; --navy-mid: #1A2F45; --navy-light: #243B55;
+    --cream: #F5F0E8; --gold: #F5C842; --gold-light: #FFE9A0; --gold-shadow: #D4A830;
+    --white: #FDFBF7;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--cream); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; min-height: 100vh; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(13,27,42,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,200,66,0.15);
+    gap: 1.5rem;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; flex-shrink: 0; }
+  .nav-logo-svg { width: 34px; height: 34px; flex-shrink: 0; }
+  .nav-logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; color: var(--cream); letter-spacing: -0.02em; }
+  .nav-center {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: var(--cream);
+    flex: 1;
+    overflow: hidden;
+  }
+  .nav-center .sep { opacity: 0.3; flex-shrink: 0; }
+  .nav-center .crumb { cursor: pointer; transition: opacity 0.2s, color 0.2s; opacity: 0.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-center .crumb:hover { opacity: 1; color: var(--gold-light); }
+  .nav-center .crumb.active { opacity: 0.7; color: var(--cream); }
+  .nav-center .crumb:last-child { opacity: 1; color: var(--gold); font-weight: 500; }
+  .nav-cta { background: var(--gold); color: var(--navy); padding: 0.5rem 1.1rem; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; white-space: nowrap; flex-shrink: 0; margin-left: auto; }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── VIEWS ── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ════════════════════════════════════
+     VIEW 1 — CATEGORY LANDING
+  ════════════════════════════════════ */
+  .landing-header {
+    background: var(--navy-mid);
+    padding: 3.5rem 3rem 2.5rem;
+    border-bottom: 1px solid rgba(245,200,66,0.1);
+  }
+  .landing-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .landing-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.05; color: var(--white); }
+  .landing-title em { font-style: normal; color: var(--gold); }
+  .landing-sub { font-size: 0.9rem; color: var(--cream); opacity: 0.5; margin-top: 0.6rem; }
+
+  .category-grid-wrap { padding: 3rem; }
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .cat-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--navy-light);
+  }
+  .cat-card:hover .cat-img { transform: scale(1.06); opacity: 1; }
+  .cat-card:hover .cat-overlay { background: linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.2) 60%); }
+  .cat-card:hover .cat-arrow { opacity: 1; transform: translateX(0); }
+
+  .cat-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s;
+    opacity: 0.75;
+    display: block;
+  }
+  .cat-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem;
+    background: var(--navy-light);
+    color: var(--cream); opacity: 0.15;
+    position: absolute; inset: 0;
+  }
+  .cat-placeholder svg { width: 36px; height: 36px; }
+  .cat-placeholder span { font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.88) 0%, rgba(13,27,42,0.1) 55%);
+    transition: background 0.3s;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+  }
+  .cat-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--white); line-height: 1.15;
+    margin-bottom: 0.3rem;
+  }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 0.72rem; color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .cat-arrow {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .cat-arrow::after { content: '→'; }
+
+  /* Gold accent bar at bottom on hover */
+  .cat-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .cat-card:hover::after { transform: scaleX(1); }
+
+  /* ════════════════════════════════════
+     VIEW 2 — PRODUCT LIST
+  ════════════════════════════════════ */
+  .product-header {
+    background: var(--navy-mid);
+    padding: 2.5rem 3rem 2rem;
+    border-bottom: 1px solid rgba(245,200,66,0.1);
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+  }
+  .product-header-left {}
+  .product-header-cat { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .product-header-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--white); line-height: 1.05; }
+  .product-header-count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--gold-light); opacity: 0.7; margin-top: 0.4rem; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    border: 1px solid rgba(245,240,232,0.15);
+    color: var(--cream); opacity: 0.6;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.78rem; font-family: var(--font-body);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .back-btn:hover { border-color: var(--gold); color: var(--gold); opacity: 1; }
+
+  .product-toolbar {
+    background: var(--navy);
+    padding: 0.9rem 3rem;
+    border-bottom: 1px solid rgba(245,200,66,0.07);
+    display: flex; align-items: center; gap: 1rem;
+    position: sticky; top: 60px; z-index: 50;
+  }
+  .product-search {
+    flex: 1; max-width: 320px;
+    background: rgba(245,240,232,0.06);
+    border: 1px solid rgba(245,240,232,0.12);
+    color: var(--cream); padding: 0.4rem 1rem;
+    font-size: 0.82rem; font-family: var(--font-body);
+    outline: none; transition: border-color 0.2s;
+  }
+  .product-search::placeholder { color: var(--cream); opacity: 0.3; }
+  .product-search:focus { border-color: var(--gold); }
+  .product-result-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--cream); opacity: 0.35; margin-left: auto; }
+
+  .product-list-wrap { padding: 2.5rem 3rem; }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* PRODUCT CARD */
+  .product-card { background: var(--navy-mid); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+  .product-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
+  .product-card.hidden { display: none !important; }
+
+  .prod-img-wrap { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--navy-light); }
+  .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, opacity 0.3s; opacity: 0.85; display: block; }
+  .product-card:hover .prod-img-wrap img { transform: scale(1.04); opacity: 1; }
+  .prod-ph {
+    width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: var(--cream); opacity: 0.15;
+    position: absolute; inset: 0;
+  }
+  .prod-ph svg { width: 26px; height: 26px; }
+  .prod-ph span { font-size: 0.68rem; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .prod-info { padding: 1rem 1.2rem 0; }
+  .prod-name { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; line-height: 1.25; }
+  .prod-client { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); opacity: 0.6; margin-bottom: 0.9rem; min-height: 1.1rem; }
+
+  .spec-table { border-top: 1px solid rgba(245,240,232,0.07); padding-top: 0.75rem; }
+  .spec-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.25rem 0; border-bottom: 1px solid rgba(245,240,232,0.04); gap: 0.6rem; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream); opacity: 0.32; flex-shrink: 0; }
+  .spec-val { font-size: 0.76rem; color: var(--cream); opacity: 0.8; text-align: right; font-family: var(--font-mono); }
+  .spec-val.empty { opacity: 0.18; font-style: italic; font-family: var(--font-body); }
+
+  .prod-cta { display: block; background: rgba(245,200,66,0.07); border-top: 1px solid rgba(245,200,66,0.12); color: var(--gold); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.75rem 1.2rem; text-align: center; transition: background 0.2s, color 0.2s; margin-top: 1rem; }
+  .prod-cta:hover { background: var(--gold); color: var(--navy); }
+
+  .no-results { display: none; grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--cream); opacity: 0.35; font-size: 0.9rem; }
+
+  /* CTA BAND */
+  .cta-band { background: var(--gold); padding: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .cta-title { font-family: var(--font-display); font-size: 1.7rem; font-weight: 900; color: var(--navy); line-height: 1.1; }
+  .cta-sub { font-size: 0.88rem; color: var(--navy); opacity: 0.65; margin-top: 0.35rem; }
+  .btn-dark { background: var(--navy); color: var(--white); padding: 0.85rem 1.8rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: background 0.2s; display: inline-block; }
+  .btn-dark:hover { background: var(--navy-light); }
+
+  /* FOOTER */
+  footer { background: #08121C; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-txt { font-size: 0.74rem; color: var(--cream); opacity: 0.28; }
+
+  /* TRANSITION */
+  .view { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 800px) {
+    nav, .landing-header, .category-grid-wrap, .product-header, .product-toolbar, .product-list-wrap, .cta-band, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .product-toolbar { top: 56px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .cta-band { flex-direction: column; align-items: flex-start; }
+    .product-header { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: 1fr; }
+    .category-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFE9A0"/><stop offset="50%" style="stop-color:#F5C842"/><stop offset="100%" style="stop-color:#D4A830"/></linearGradient>
+        <linearGradient id="ngv" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#FFE9A0"/><stop offset="100%" style="stop-color:#D4A830"/></linearGradient>
+        <linearGradient id="nnb" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1A2F48"/><stop offset="100%" style="stop-color:#0A1825"/></linearGradient>
+      </defs>
+      <rect x="1" y="1" width="258" height="258" rx="3" fill="url(#nnb)" stroke="url(#ng)" stroke-width="2.5"/>
+      <rect x="9" y="9" width="242" height="242" rx="1.5" fill="none" stroke="url(#ng)" stroke-width="0.7" stroke-opacity="0.4"/>
+      <g transform="translate(66,89) scale(0.576)">
+        <path d="M 0 79 C 5 62,19 52,38 48 C 58 44,85 43,112 45 C 136 47,156 52,170 60 C 180 67,185 74,187 79 C 185 84,180 91,170 98 C 156 106,136 111,112 113 C 85 115,58 114,38 110 C 19 106,5 96,0 79 Z" fill="none" stroke="url(#ng)" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M 187 79 C 196 79,202 80,206 81" fill="none" stroke="url(#ng)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 187 79 C 196 79,202 78,206 77" fill="none" stroke="url(#ng)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 206 77 C 210 71,214 63,220 54 C 223 48,224 45,222 49 C 219 55,214 65,210 76" fill="none" stroke="url(#ng)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 206 81 C 210 87,214 95,220 104 C 223 110,224 113,222 109 C 219 103,214 93,210 82" fill="none" stroke="url(#ng)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 210 76 C 207 79,207 79,210 82" fill="none" stroke="url(#ng)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M 28 48 C 23 37,21 24,25 13" fill="none" stroke="url(#ng)" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M 34 46 C 30 35,29 22,35 11" fill="none" stroke="url(#ng)" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="15" cy="76" r="6" fill="url(#ngv)"/><circle cx="14" cy="75" r="2.5" fill="#0A1825"/>
+        <path d="M 0 79 C 5 91,19 101,38 104" fill="none" stroke="url(#ng)" stroke-width="2.8" stroke-linecap="round" stroke-opacity="0.55"/>
+        <g transform="translate(38,106)"><path d="M 4 -6 C 0 2,-6 12,-10 20 C -14 28,-14 34,-8 34 C 0 34,10 24,14 12 C 18 0,12 -10,4 -6 Z" fill="none" stroke="url(#ng)" stroke-width="4.5" stroke-linejoin="round" transform="rotate(-55,0,0)"/></g>
+      </g>
+    </svg>
+    <div class="nav-logo-text">Paus Konveksi</div>
+  </a>
+  <div class="nav-center" id="breadcrumb">
+    <span class="crumb active" onclick="showLanding()">Katalog</span>
+    <span class="sep" id="sep2" style="display:none">›</span>
+    <span class="crumb active" id="crumb2" style="display:none"></span>
+  </div>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta" target="_blank">Konsultasi Gratis</a>
+</nav>
+
+<!-- ════════════════════════════════════════
+     VIEW 1 — KATEGORI LANDING
+════════════════════════════════════════ -->
+<div class="view active" id="view-landing">
+
+  <div class="landing-header">
+    <div class="landing-label">Produk Kami</div>
+    <h1 class="landing-title">Pilih <em>Kategori</em></h1>
+    <p class="landing-sub">Klik kategori untuk melihat semua produk beserta spesifikasinya.</p>
+  </div>
+
+  <div class="category-grid-wrap">
+    <div class="category-grid" id="categoryGrid">
+      <!-- Dirender oleh JavaScript -->
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════
+     VIEW 2 — PRODUK PER KATEGORI
+════════════════════════════════════════ -->
+<div class="view" id="view-products">
+
+  <div class="product-header">
+    <div class="product-header-left">
+      <div class="product-header-cat" id="prodHeaderCat">Kategori</div>
+      <div class="product-header-title" id="prodHeaderTitle">Nama Kategori</div>
+      <div class="product-header-count" id="prodHeaderCount">0 produk</div>
+    </div>
+    <button class="back-btn" onclick="showLanding()">← Semua Kategori</button>
+  </div>
+
+  <div class="product-toolbar">
+    <input type="text" class="product-search" placeholder="Cari nama produk..." oninput="searchProducts(this.value)" id="productSearch" />
+    <span class="product-result-count" id="productResultCount"></span>
+  </div>
+
+  <div class="product-list-wrap">
+    <div class="product-grid" id="productGrid">
+      <div class="no-results" id="noResults">Tidak ada produk yang cocok.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div>
+    <div class="cta-title">Tidak menemukan yang dicari?</div>
+    <p class="cta-sub">Kami bisa produksi desain custom dari nol. Konsultasi gratis.</p>
+  </div>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi,%20saya%20ingin%20konsultasi%20custom%20tas." class="btn-dark" target="_blank">Chat WhatsApp Sekarang</a>
+</div>
+
+<footer>
+  <span class="footer-txt">© 2025 Paus Konveksi · Kapuk Muara, Jakarta Utara</span>
+  <span class="footer-txt">0812 6222 2911 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7303120600181c1d051618001a33141e121a1f5d101c1e">[email&#160;protected]</a></span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+  const _revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        _revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => _revealObs.observe(el));
+</script><script>
+// ================================================================
+//  KONFIGURASI KATEGORI
+//  ================================================================
+//  Untuk setiap kategori:
+//  - id:     jangan diubah (dipakai sebagai filter)
+//  - nama:   nama yang tampil di kartu kategori
+//  - desc:   deskripsi singkat di bawah nama
+//  - cover:  URL foto cover kategori (foto terbaik dari kategori ini)
+//            Kosongkan ("") jika belum ada foto
+// ================================================================
+
+const KATEGORI = [
+  {
+    id:    "backpack",
+    nama:  "Backpack",
+    desc:  "Ransel, roll-top, daypack, tas laptop",
+    cover: ""
+  },
+  {
+    id:    "tote-bag",
+    nama:  "Tote Bag",
+    desc:  "Canvas, non-woven, spunbond",
+    cover: ""
+  },
+  {
+    id:    "goodie-bag",
+    nama:  "Goodie Bag",
+    desc:  "Seminar, event, pameran",
+    cover: ""
+  },
+  {
+    id:    "tas-laptop",
+    nama:  "Tas Laptop",
+    desc:  "Tas kerja, briefcase, sleeve",
+    cover: ""
+  },
+  {
+    id:    "sling-bag",
+    nama:  "Sling Bag",
+    desc:  "Selempang, waist bag, crossbody",
+    cover: ""
+  },
+  {
+    id:    "pouch",
+    nama:  "Pouch",
+    desc:  "Dompet, kosmetik, aksesoris",
+    cover: ""
+  },
+  {
+    id:    "drawstring",
+    nama:  "Drawstring Bag",
+    desc:  "Tas serut, cinch bag, gym bag",
+    cover: ""
+  },
+  {
+    id:    "tas-travel",
+    nama:  "Tas Travel",
+    desc:  "Duffel, travel bag, koper kain",
+    cover: ""
+  },
+];
+
+// ================================================================
+//  DATA PRODUK
+//  ================================================================
+//  Cara mengisi:
+//  1. Duplikasi satu blok { ... },
+//  2. Isi setiap field. Field boleh dikosongkan dengan ""
+//  3. Untuk foto: isi URL foto produk Anda
+//     (Google Drive: https://lh3.googleusercontent.com/d/FILE_ID)
+//  4. kategori harus sesuai dengan id di KATEGORI di atas
+//  5. Simpan → refresh browser → produk langsung muncul
+// ================================================================
+
+const PRODUK = [
+
+  // ── BACKPACK ─────────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "NAMA KLIEN",
+    kategori:   "backpack",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "backpack",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "backpack",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── TOTE BAG ─────────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "NAMA KLIEN",
+    kategori:   "tote-bag",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "tote-bag",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── GOODIE BAG ───────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "NAMA KLIEN",
+    kategori:   "goodie-bag",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "goodie-bag",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── TAS LAPTOP ───────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "NAMA KLIEN",
+    kategori:   "tas-laptop",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── SLING BAG ────────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "sling-bag",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── POUCH ────────────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "pouch",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── DRAWSTRING ───────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "drawstring",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // ── TAS TRAVEL ───────────────────────────────────────────────
+  {
+    nama:       "NAMA PRODUK",
+    klien:      "",
+    kategori:   "tas-travel",
+    foto:       "",
+    material:   "",
+    ukuran:     "",
+    warna:      "",
+    moq:        "",
+    keterangan: ""
+  },
+
+  // Duplikasi baris di atas untuk menambah produk.
+  // Tidak ada batas jumlah produk.
+
+];
+
+// ================================================================
+//  RENDER ENGINE — tidak perlu diubah
+// ================================================================
+
+function phIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <circle cx="8.5" cy="8.5" r="1.5"/>
+    <path d="M21 15l-5-5L5 21"/>
+  </svg>`;
+}
+
+// Render kategori cards
+function renderCategories() {
+  const grid = document.getElementById('categoryGrid');
+  grid.innerHTML = KATEGORI.map(cat => {
+    const count = PRODUK.filter(p => p.kategori === cat.id).length;
+    const hasPhoto = cat.cover && cat.cover.trim() !== '';
+    const imgHtml = hasPhoto
+      ? `<img class="cat-img" src="${cat.cover}" alt="${cat.nama}"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const phStyle = hasPhoto ? 'display:none' : 'display:flex';
+
+    return `
+      <div class="cat-card" onclick="showCategory('${cat.id}')">
+        ${imgHtml}
+        <div class="cat-placeholder" style="${phStyle}">
+          ${phIcon()}
+          <span>Cover segera</span>
+        </div>
+        <div class="cat-overlay">
+          <div class="cat-name">${cat.nama}</div>
+          <div class="cat-count">${count} produk</div>
+          <div class="cat-arrow">Lihat semua</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Render produk dalam satu kategori
+function renderProducts(catId) {
+  const grid = document.getElementById('productGrid');
+  const products = PRODUK.filter(p => p.kategori === catId);
+  const noEl = document.getElementById('noResults');
+
+  grid.innerHTML = products.map(p => {
+    const wa = encodeURIComponent(`Halo Admin Paus Konveksi, saya tertarik dengan produk ${p.nama}`);
+    const hasPhoto = p.foto && p.foto.trim() !== '';
+    const imgHtml = hasPhoto
+      ? `<img src="${p.foto}" alt="${p.nama}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const phStyle = hasPhoto ? 'display:none' : 'display:flex';
+
+    const specs = [
+      ['Material', p.material],
+      ['Ukuran',   p.ukuran],
+      ['Warna',    p.warna],
+      ['MOQ',      p.moq ? p.moq + ' pcs' : ''],
+      ['Ket.',     p.keterangan],
+    ].map(([k,v]) =>
+      `<div class="spec-row">
+        <span class="spec-key">${k}</span>
+        <span class="spec-val ${v?'':'empty'}">${v||'—'}</span>
+      </div>`
+    ).join('');
+
+    return `
+      <div class="product-card" data-name="${p.nama.toLowerCase()}">
+        <div class="prod-img-wrap">
+          ${imgHtml}
+          <div class="prod-ph" style="${phStyle}">
+            ${phIcon()}
+            <span>Foto segera</span>
+          </div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">${p.nama}</div>
+          <div class="prod-client">${p.klien||''}</div>
+          <div class="spec-table">${specs}</div>
+        </div>
+        <a href="https://wa.me/6281262222911?text=${wa}" class="prod-cta" target="_blank">
+          Tanya Harga via WhatsApp →
+        </a>
+      </div>`;
+  }).join('');
+
+  grid.appendChild(noEl);
+  updateProductCount();
+}
+
+function updateProductCount() {
+  const cards = document.querySelectorAll('#productGrid .product-card');
+  const visible = [...cards].filter(c => !c.classList.contains('hidden')).length;
+  document.getElementById('productResultCount').textContent =
+    visible > 0 ? `${visible} produk ditampilkan` : '';
+}
+
+// Navigation
+function showLanding() {
+  document.getElementById('view-landing').classList.add('active');
+  document.getElementById('view-products').classList.remove('active');
+  document.getElementById('sep2').style.display = 'none';
+  document.getElementById('crumb2').style.display = 'none';
+  document.getElementById('productSearch').value = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showCategory(catId) {
+  const cat = KATEGORI.find(c => c.id === catId);
+  if (!cat) return;
+
+  // Update header
+  document.getElementById('prodHeaderCat').textContent = 'Kategori';
+  document.getElementById('prodHeaderTitle').textContent = cat.nama;
+  const count = PRODUK.filter(p => p.kategori === catId).length;
+  document.getElementById('prodHeaderCount').textContent = `${count} produk`;
+
+  // Breadcrumb
+  document.getElementById('sep2').style.display = 'inline';
+  const crumb2 = document.getElementById('crumb2');
+  crumb2.style.display = 'inline';
+  crumb2.textContent = cat.nama;
+
+  // Render products
+  renderProducts(catId);
+  document.getElementById('productSearch').value = '';
+
+  // Switch views
+  document.getElementById('view-landing').classList.remove('active');
+  document.getElementById('view-products').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function searchProducts(val) {
+  const q = val.toLowerCase();
+  document.querySelectorAll('#productGrid .product-card').forEach(c => {
+    c.classList.toggle('hidden', q && !c.dataset.name.includes(q));
+  });
+  const visible = [...document.querySelectorAll('#productGrid .product-car
