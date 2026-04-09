@@ -30,7 +30,7 @@
   .nav-cta:hover{background:var(--gold-light);}
 
   /* HERO */
-  .testi-hero{background:var(--navy-mid);padding:5rem 3rem 4rem;border-bottom:1px solid rgba(245,200,66,0.1);}
+  .testi-hero{background:var(--navy-mid);padding:5rem 3rem 4rem;border-bottom:1px solid rgba(245,200,66,0.1);} .testi-hero .hero-label{margin-top:0;}
   .hero-label{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
   .hero-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.0;color:var(--white);}
   .hero-title em{font-style:normal;color:var(--gold);}
@@ -106,6 +106,13 @@
   .footer-socmed { display: flex; gap: 1rem; align-items: center; }
   .socmed-link { color: var(--cream); opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; }
   .socmed-link:hover { opacity: 1; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0.9rem 1.5rem; }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+    .nav-cta { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -141,14 +148,28 @@
     <li><a href="katalog.html">Katalog</a></li>
     <li><a href="index.html#portfolio">Portfolio</a></li>
     <li><a href="about.html">About Us</a></li>
+    <li><a href="testimoni.html" class="active">Testimoni</a></li>
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="blog.html">Blog</a></li>
   </ul>
-  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta">Konsultasi Gratis</a>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta" target="_blank">Konsultasi Gratis</a>
 </nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="index.html#services">Layanan</a>
+  <a href="katalog.html">Katalog</a>
+  <a href="index.html#portfolio">Portfolio</a>
+  <a href="about.html">About Us</a>
+  <a href="testimoni.html" class="active">Testimoni</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-mobile-cta" target="_blank">Konsultasi Gratis →</a>
+</div>
 
 <!-- HERO -->
-<div class="testi-hero reveal">
+<div class="testi-hero">
   <div class="hero-label">Kata Klien Kami</div>
   <h1 class="hero-title">100+ Perusahaan<br><em>Sudah Mempercayai Kami.</em></h1>
   <p class="hero-sub">Dari BUMN, perusahaan multinasional, hingga brand lokal — ini yang mereka katakan tentang pengalaman bekerja sama dengan Paus Konveksi.</p>
@@ -461,6 +482,24 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 <script src="reveal.js"></script>
+<script>
+  function toggleMenu() {
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    btn.classList.toggle('open');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+      btn.classList.remove('open');
+      menu.style.display = 'none';
+    }
+  });
+</script>
 </body>
 </html>

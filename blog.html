@@ -115,6 +115,13 @@
   .footer-socmed { display: flex; gap: 1rem; align-items: center; }
   .socmed-link { color: var(--cream); opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; }
   .socmed-link:hover { opacity: 1; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0.9rem 1.5rem; }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+    .nav-cta { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -154,8 +161,21 @@
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="blog.html" class="active">Blog</a></li>
   </ul>
-  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta">Konsultasi Gratis</a>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta" target="_blank">Konsultasi Gratis</a>
 </nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="index.html#services">Layanan</a>
+  <a href="katalog.html">Katalog</a>
+  <a href="index.html#portfolio">Portfolio</a>
+  <a href="about.html">About Us</a>
+  <a href="testimoni.html">Testimoni</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-mobile-cta" target="_blank">Konsultasi Gratis →</a>
+</div>
 
 <div class="blog-hero reveal">
   <div class="blog-label">Tips, Edukasi & Inspirasi</div>
@@ -368,6 +388,24 @@
 
 
 document.querySelectorA
+
 <script src="reveal.js"></script>
+<script>
+  function toggleMenu() {
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    btn.classList.toggle('open');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+      btn.classList.remove('open');
+      menu.style.display = 'none';
+    }
+  });
+</script>
 </body>
 </html>
