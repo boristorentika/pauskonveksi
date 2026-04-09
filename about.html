@@ -350,48 +350,6 @@
   </div>
   <span class="footer-txt">0812 6222 2911 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f0f1e0a0c141011091a140c163f18121e1613511c1012">[email&#160;protected]</a></span>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts
-<script>
-  
-  }
-</script>
-
-<script>
-(function() {
-  function initReveal() {
-    var els = document.querySelectorAll('.reveal');
-    if (!els.length) return;
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-    els.forEach(function(el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('visible');
-      } else {
-        obs.observe(el);
-      }
-    });
-  }
-
-  // Try multiple entry points to ensure it runs
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
-    });
-  } else {
-    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
-  }
-  // Fallback: also run on load
-  window.addEventListener('load', function() {
-    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
-  });
-})();
-</script>
+<script src="reveal.js"></script>
+</body>
+</html>
