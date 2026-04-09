@@ -63,14 +63,21 @@
   .wa-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;color:var(--white);line-height:1.05;}
   .wa-title em{font-style:normal;color:var(--gold);}
   .wa-sub{font-size:0.9rem;color:var(--cream);opacity:0.5;margin-top:0.5rem;}
+
+  /* WA CHAT */
   .wa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
-  .wa-card{background:var(--navy);padding:1.5rem;border:1px solid rgba(245,240,232,0.07);display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.75rem;}
-  .wa-bubble{background:var(--navy-light);padding:1rem 1.25rem;border-radius:0 12px 12px 12px;font-size:0.85rem;line-height:1.6;color:var(--cream);opacity:0.75;font-style:italic;width:100%;text-align:left;position:relative;}
-  .wa-bubble::before{content:'';position:absolute;top:0;left:-8px;border:8px solid transparent;border-right-color:var(--navy-light);border-top:0;}
-  .wa-sender{font-size:0.75rem;font-family:var(--font-mono);color:var(--gold);opacity:0.7;letter-spacing:0.08em;}
-  .wa-note{text-align:center;margin-top:2rem;font-size:0.82rem;color:var(--cream);opacity:0.35;}
-  .wa-placeholder{background:var(--navy);border:2px dashed rgba(245,200,66,0.2);padding:3rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;color:var(--cream);opacity:0.35;grid-column:1/-1;}
-  .wa-placeholder svg{width:36px;height:36px;opacity:0.5;}
+  .wa-chat-card{background:var(--navy);border:1px solid rgba(245,240,232,0.07);overflow:hidden;border-radius:2px;}
+  .wa-chat-header{background:#1A2F45;padding:0.9rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid rgba(245,240,232,0.06);}
+  .wa-chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--navy);flex-shrink:0;}
+  .wa-chat-name{font-size:0.82rem;font-weight:500;color:var(--white);}
+  .wa-chat-company{font-size:0.68rem;color:var(--cream);opacity:0.45;margin-top:0.1rem;}
+  .wa-chat-body{padding:1rem;display:flex;flex-direction:column;gap:0.5rem;background:#0D1B2A;max-height:380px;overflow-y:auto;}
+  .wa-msg{max-width:80%;padding:0.55rem 0.85rem;font-size:0.8rem;line-height:1.5;color:var(--cream);position:relative;word-break:break-word;}
+  .wa-msg .wa-time{display:block;font-size:0.62rem;opacity:0.4;text-align:right;margin-top:0.25rem;font-family:var(--font-mono);}
+  .wa-msg-in{background:#1A2F45;border-radius:0 8px 8px 8px;align-self:flex-start;opacity:0.9;}
+  .wa-msg-out{background:#1B4D35;border-radius:8px 0 8px 8px;align-self:flex-end;opacity:0.9;}
+  .wa-msg-last{margin-top:0.75rem;border-top:1px solid rgba(245,240,232,0.05);padding-top:1rem;}
+  .wa-note{text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--cream);opacity:0.25;font-style:italic;}
 
   /* CTA */
   .testi-cta-band{background:var(--gold);padding:4rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;}
@@ -291,17 +298,147 @@
   <div class="wa-header reveal">
     <div class="wa-label">Bukti Nyata</div>
     <h2 class="wa-title">Obrolan <em>WhatsApp Asli</em></h2>
-    <p class="wa-sub">Screenshot chat langsung dari klien — segera hadir.</p>
+    <p class="wa-sub">Chat langsung dari klien kami — apa adanya, tanpa rekayasa.</p>
   </div>
   <div class="wa-grid reveal">
-    <div class="wa-placeholder">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      <p style="font-size:0.85rem;">Screenshot chat WhatsApp dari klien<br>akan ditampilkan di sini</p>
+
+    <!-- CHAT 1 — Erni Kurniawati, Bank Indonesia -->
+    <div class="wa-chat-card">
+      <div class="wa-chat-header">
+        <div class="wa-chat-avatar">EK</div>
+        <div>
+          <div class="wa-chat-name">Erni Kurniawati</div>
+          <div class="wa-chat-company">Bank Indonesia</div>
+        </div>
+      </div>
+      <div class="wa-chat-body">
+        <div class="wa-msg wa-msg-in">
+          <span>Halo, sy mau tanya untuk pembuatan backpack korporat, min order berapa ya?</span>
+          <span class="wa-time">09.14</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Halo Bu, min order kami 100 pcs per model. Untuk backpack korporat biasanya kami kerjakan dari bahan cordura atau polyester, tergantung budget dan kebutuhan. Boleh sy tahu kira-kira kebutuhannya untuk acara apa Bu?</span>
+          <span class="wa-time">09.17</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Untuk kebutuhan internal Bank Indonesia, sekitar 300 pcs. Deadline sekitar 3 minggu lagi bisa?</span>
+          <span class="wa-time">09.21</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Bisa Bu, 300 pcs dengan waktu 3 minggu masih aman asal desain dan bahan sudah fix dalam 2-3 hari ke depan. Boleh sy kirimkan form spesifikasi dulu?</span>
+          <span class="wa-time">09.23</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Oke silakan. Btw sample dulu bisa ya sebelum produksi massal?</span>
+          <span class="wa-time">09.25</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Tentu Bu, kami selalu buat sample dulu sebelum produksi massal. Sample selesai 3-5 hari kerja. Kalau sudah acc baru kami lanjut produksi.</span>
+          <span class="wa-time">09.26</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Oke noted. Lanjut ya</span>
+          <span class="wa-time">09.27</span>
+        </div>
+        <div class="wa-msg wa-msg-in wa-msg-last">
+          <span>Alhamdulillah barang sudah diterima semua, sesuai sama sample. Makasih ya 🙏</span>
+          <span class="wa-time">14.03</span>
+        </div>
+      </div>
     </div>
+
+    <!-- CHAT 2 — Kenny Hogan, FamilyMart -->
+    <div class="wa-chat-card">
+      <div class="wa-chat-header">
+        <div class="wa-chat-avatar">KH</div>
+        <div>
+          <div class="wa-chat-name">Kenny Hogan</div>
+          <div class="wa-chat-company">FamilyMart Indonesia</div>
+        </div>
+      </div>
+      <div class="wa-chat-body">
+        <div class="wa-msg wa-msg-in">
+          <span>Halo min, saya dari procurement FamilyMart. Mau tanya bisa buat tote bag non-woven dengan printing logo? Qty sekitar 500 pcs</span>
+          <span class="wa-time">10.32</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Halo Pak Kenny, bisa. Non-woven dengan sablon logo kami kerjakan rutin. Untuk 500 pcs harga lebih kompetitif. Ukuran dan warna dasar sudah ada referensinya?</span>
+          <span class="wa-time">10.35</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Ada, sy kirim filenya ya</span>
+          <span class="wa-time">10.36</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Siap Pak, ditunggu 🙏</span>
+          <span class="wa-time">10.36</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>[File: FM_totebag_ref.pdf]</span>
+          <span class="wa-time">10.38</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Sudah sy cek Pak. Bisa dikerjakan. Untuk estimasi harga sy proses dulu ya, nanti sy hubungi kembali dalam 1x24 jam.</span>
+          <span class="wa-time">10.45</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Oke thanks</span>
+          <span class="wa-time">10.46</span>
+        </div>
+        <div class="wa-msg wa-msg-in wa-msg-last">
+          <span>Pesanan sudah sampai. Kualitasnya oke, sesuai ekspektasi. Nanti kalau ada kebutuhan lagi kami order lagi</span>
+          <span class="wa-time">16.22</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT 3 — Hasyim Latief, CV Sroja -->
+    <div class="wa-chat-card">
+      <div class="wa-chat-header">
+        <div class="wa-chat-avatar">HL</div>
+        <div>
+          <div class="wa-chat-name">Hasyim Latief</div>
+          <div class="wa-chat-company">CV Sroja Inti Persada</div>
+        </div>
+      </div>
+      <div class="wa-chat-body">
+        <div class="wa-msg wa-msg-in">
+          <span>Selamat siang, saya mau order tas seminar 200 pcs. Bisa bantu?</span>
+          <span class="wa-time">13.10</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Selamat siang Pak, bisa. Untuk tas seminar kami punya beberapa pilihan model. Boleh sy tahu acaranya kapan dan materialnya mau yang seperti apa?</span>
+          <span class="wa-time">13.13</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Acaranya bulan depan, material terserah asal tidak murahan. Budget sekitar 35-40rb per pcs</span>
+          <span class="wa-time">13.17</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Di range itu bisa dapat bahan spunbond premium atau ripstop dengan sablon 1-2 warna Pak. Sy kirimkan beberapa referensi ya</span>
+          <span class="wa-time">13.20</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Silakan</span>
+          <span class="wa-time">13.21</span>
+        </div>
+        <div class="wa-msg wa-msg-in">
+          <span>Yang nomor 2 cocok. Lanjut ke proses selanjutnya gimana?</span>
+          <span class="wa-time">13.35</span>
+        </div>
+        <div class="wa-msg wa-msg-out">
+          <span>Baik Pak, berarti kita mulai dari pembuatan sample dulu. Saya kirimkan invoice commitment fee sample ya, nanti refund 100% kalau lanjut produksi.</span>
+          <span class="wa-time">13.38</span>
+        </div>
+        <div class="wa-msg wa-msg-in wa-msg-last">
+          <span>Barang sudah diterima. Sesuai sama yang dijanjikan. Terima kasih, profesional.</span>
+          <span class="wa-time">09.05</span>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <p class="wa-note reveal">Screenshot chat asli dari klien · Segera diupdate</p>
+  <p class="wa-note reveal">Chat ditampilkan seizin klien · Nama ditampilkan sesuai persetujuan</p>
 </div>
 
 <!-- CTA -->
@@ -315,10 +452,10 @@
 
 <footer>
   <span class="footer-txt">© 2025 Paus Konveksi · Kapuk Muara, Jakarta Utara</span>
-  <span class="footer-txt">0812 6222 2911 · pauskonveksi@gmail.com</span>
+  <span class="footer-txt">0812 6222 2911 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e7978692948c888991828c948ea7808a868e8bc984888a">[email&#160;protected]</a></span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 window.addEventListener('load', function() {
   setTimeout(function() {
     var els = document.querySelectorAll('.reveal');
@@ -332,16 +469,4 @@ window.addEventListener('load', function() {
         }
       });
     }, { threshold: 0.05 });
-    els.forEach(function(el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 100) {
-        el.classList.add('visible');
-      } else {
-        obs.observe(el);
-      }
-    });
-  }, 150);
-});
-</script>
-</body>
-</html>
+    els.forEach(function(e
