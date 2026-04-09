@@ -6,7 +6,7 @@
 <title>Testimoni Klien | Paus Konveksi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-
+<style>
   :root {
     --navy:#0D1B2A;--navy-mid:#1A2F45;--navy-light:#243B55;
     --cream:#F5F0E8;--gold:#F5C842;--gold-light:#FFE9A0;
@@ -94,83 +94,24 @@
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
 
-  
+  @media(max-width:900px){
+    nav,footer{padding-left:1.5rem;padding-right:1.5rem;}
+    .testi-hero,.testi-body,.wa-section{padding-left:1.5rem;padding-right:1.5rem;}
+    .testi-cta-band{flex-direction:column;align-items:flex-start;padding:3rem 1.5rem;}
+    .testi-grid,.wa-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:2rem;}
+    .nav-links{display:none;}
+  }
 
   .footer-socmed { display: flex; gap: 1rem; align-items: center; }
   .socmed-link { color: var(--cream); opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; }
   .socmed-link:hover { opacity: 1; }
 
-  
-
-  /* Hamburger - hidden by default, shown on mobile */
-  /* Mobile menu - hidden by default */
-  
-    
-  }
-
-  
-
-  
-
-  /* ── MOBILE NAV ── */
-  .nav-hamburger {
-    display: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--cream);
-    transition: all 0.3s;
-    border-radius: 1px;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .nav-mobile-menu {
-    display: none;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: var(--navy-mid);
-    z-index: 9999;
-    border-bottom: 1px solid rgba(245,200,66,0.15);
-    flex-direction: column;
-  }
-  .nav-mobile-menu a {
-    color: var(--cream);
-    text-decoration: none;
-    padding: 0.9rem 1.5rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(245,240,232,0.05);
-    opacity: 0.7;
-    display: block;
-  }
-  .nav-mobile-menu a:hover { opacity: 1; color: var(--gold-light); }
-  .nav-mobile-menu .nav-mobile-cta {
-    background: var(--gold);
-    color: var(--navy);
-    opacity: 1;
-    font-weight: 500;
-  }
-  
-  /* ─────────────── */
   @media (max-width: 900px) {
     nav { padding: 0.9rem 1.5rem; }
     .nav-links { display: none !important; }
-    .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; }
-    .nav-cta { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+    .nav-cta { display: none; }
   }
 </style>
 </head>
