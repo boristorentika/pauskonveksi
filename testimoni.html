@@ -91,7 +91,8 @@
   footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
   .footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
 
-  .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
 
   @media(max-width:900px){
     nav,footer{padding-left:1.5rem;padding-right:1.5rem;}
@@ -460,35 +461,40 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function loadMoreWA() {
-    var row2 = document.getElementById('waRow2');
-    var row3 = document.getElementById('waRow3');
-    var btn = document.getElementById('waLoadMore');
-    if (row2) { row2.style.display = 'grid'; row2.style.marginTop = '1.5rem'; }
-    if (row3) { row3.style.display = 'grid'; row3.style.marginTop = '1.5rem'; }
-    if (btn) { btn.style.display = 'none'; }
-  }
-
-  window.addEventListener('load', function() {
-  setTimeout(function() {
+(function() {
+  function initReveal() {
     var els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
     var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry, i) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          (function(el, delay) {
-            setTimeout(function() { el.classList.add('visible'); }, delay);
-          })(entry.target, i * 80);
+          entry.target.classList.add('visible');
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05 });
-    els.forEach(function(e<script>
-  function loadMoreWA() {
-    var row2 = document.getElementById('waRow2');
-    var row3 = document.getElementById('waRow3');
-    var btn = document.getElementById('waLoadMore');
-    if (row2) { row2.style.display = 'grid'; row2.style.marginTop = '1.5rem'; }
-    if (row3) { row3.style.display = 'grid'; row3.style.marginTop = '1.5rem'; }
-    if (btn) { btn.style.display = 'none'; }
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    els.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      } else {
+        obs.observe(el);
+      }
+    });
   }
+
+  // Try multiple entry points to ensure it runs
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
+    });
+  } else {
+    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
+  }
+  // Fallback: also run on load
+  window.addEventListener('load', function() {
+    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
+  });
+})();
 </script>

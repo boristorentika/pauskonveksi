@@ -90,11 +90,7 @@
   footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
   .footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible {
     opacity: 1;
     transform: none;
@@ -372,28 +368,42 @@
 
 
 document.querySelectorA
+
 <script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      var els = document.querySelectorAll('.reveal');
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry, i) {
-          if (entry.isIntersecting) {
-            (function(el, delay) {
-              setTimeout(function() { el.classList.add('visible'); }, delay);
-            })(entry.target, i * 80);
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05 });
-      els.forEach(function(el) {
-        var rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 100) {
-          el.classList.add('visible');
-        } else {
-          obs.observe(el);
+(function() {
+  function initReveal() {
+    var els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
         }
       });
-    }, 150);
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    els.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      } else {
+        obs.observe(el);
+      }
+    });
+  }
+
+  // Try multiple entry points to ensure it runs
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
+    });
+  } else {
+    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
+  }
+  // Fallback: also run on load
+  window.addEventListener('load', function() {
+    requestAnimationFrame(function() { requestAnimationFrame(initReveal); });
   });
+})();
 </script>
