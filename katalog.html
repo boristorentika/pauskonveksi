@@ -6,7 +6,7 @@
 <title>Katalog Produk | Paus Konveksi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
+
   :root {
     --navy: #0D1B2A; --navy-mid: #1A2F45; --navy-light: #243B55;
     --cream: #F5F0E8; --gold: #F5C842; --gold-light: #FFE9A0; --gold-shadow: #D4A830;
@@ -31,17 +31,12 @@
   .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; flex-shrink: 0; }
   .nav-logo-svg { width: 34px; height: 34px; flex-shrink: 0; }
   .nav-logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; color: var(--cream); letter-spacing: -0.02em; }
-  .nav-center {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.8rem; color: var(--cream);
-    flex: 1;
-    overflow: hidden;
-  }
-  .nav-center .sep { opacity: 0.3; flex-shrink: 0; }
-  .nav-center .crumb { cursor: pointer; transition: opacity 0.2s, color 0.2s; opacity: 0.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .nav-center .crumb:hover { opacity: 1; color: var(--gold-light); }
-  .nav-center .crumb.active { opacity: 0.7; color: var(--cream); }
-  .nav-center .crumb:last-child { opacity: 1; color: var(--gold); font-weight: 500; }
+  
+  
+  
+  
+  
+  
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
   .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
@@ -267,37 +262,78 @@
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
 
-  @media (max-width: 900px) {
-    nav { padding: 0.9rem 1.5rem; }
-    .nav-links { display: none !important; }
-    .nav-cta { display: none; }
-  }
+  
 
   /* Hamburger - hidden by default, shown on mobile */
-  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.25rem; flex-direction: column; gap: 5px; }
-  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); transition: all 0.3s; }
+  /* Mobile menu - hidden by default */
+  
+    
+  }
+
+  
+
+  
+
+  /* ── MOBILE NAV ── */
+  .nav-hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--cream);
+    transition: all 0.3s;
+    border-radius: 1px;
+  }
   .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* Mobile menu - hidden by default */
-  .nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--navy-mid); z-index: 99; border-bottom: 1px solid rgba(245,200,66,0.1); flex-direction: column; }
-  .nav-mobile-menu a { color: var(--cream); text-decoration: none; padding: 0.9rem 1.5rem; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid rgba(245,240,232,0.05); opacity: 0.7; }
-  .nav-mobile-menu a:hover, .nav-mobile-menu a.active { opacity: 1; color: var(--gold-light); }
-  .nav-mobile-menu .nav-mobile-cta { background: var(--gold); color: var(--navy); opacity: 1; font-weight: 500; }
-
-  /* Mobile breakpoint */
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--navy-mid);
+    z-index: 9999;
+    border-bottom: 1px solid rgba(245,200,66,0.15);
+    flex-direction: column;
+  }
+  .nav-mobile-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(245,240,232,0.05);
+    opacity: 0.7;
+    display: block;
+  }
+  .nav-mobile-menu a:hover { opacity: 1; color: var(--gold-light); }
+  .nav-mobile-menu .nav-mobile-cta {
+    background: var(--gold);
+    color: var(--navy);
+    opacity: 1;
+    font-weight: 500;
+  }
+  
+  /* ─────────────── */
   @media (max-width: 900px) {
     nav { padding: 0.9rem 1.5rem; }
     .nav-links { display: none !important; }
-    .nav-hamburger { display: none; }
+    .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; }
     .nav-cta { display: none !important; }
   }
-
-  /* Nav base reset */
-  nav { list-style: none; }
-  .nav-links { list-style: none; margin: 0; padding: 0; }
-  .nav-links li { list-style: none; }
 </style>
 </head>
 <body>
@@ -794,6 +830,7 @@ function searchProducts(val) {
   });
   const visible = [...document.querySelectorAll('#productGrid .product-car
 
+</script>
 <script src="reveal.js"></script>
 <script>
   function toggleMenu() {
