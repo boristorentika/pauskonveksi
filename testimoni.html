@@ -66,17 +66,19 @@
 
   /* WA CHAT */
   .wa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
-  .wa-chat-card{background:var(--navy);border:1px solid rgba(245,240,232,0.07);overflow:hidden;border-radius:2px;}
-  .wa-chat-header{background:#1A2F45;padding:0.9rem 1.25rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid rgba(245,240,232,0.06);}
-  .wa-chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--navy);flex-shrink:0;}
-  .wa-chat-name{font-size:0.82rem;font-weight:500;color:var(--white);}
-  .wa-chat-company{font-size:0.68rem;color:var(--cream);opacity:0.45;margin-top:0.1rem;}
-  .wa-chat-body{padding:1rem;display:flex;flex-direction:column;gap:0.5rem;background:#0D1B2A;max-height:380px;overflow-y:auto;}
-  .wa-msg{max-width:80%;padding:0.55rem 0.85rem;font-size:0.8rem;line-height:1.5;color:var(--cream);position:relative;word-break:break-word;}
-  .wa-msg .wa-time{display:block;font-size:0.62rem;opacity:0.4;text-align:right;margin-top:0.25rem;font-family:var(--font-mono);}
-  .wa-msg-in{background:#1A2F45;border-radius:0 8px 8px 8px;align-self:flex-start;opacity:0.9;}
-  .wa-msg-out{background:#1B4D35;border-radius:8px 0 8px 8px;align-self:flex-end;opacity:0.9;}
-  .wa-msg-last{margin-top:0.75rem;border-top:1px solid rgba(245,240,232,0.05);padding-top:1rem;}
+  .wa-chat-card{background:#111b21;border-radius:10px;overflow:hidden;font-family:-apple-system,'Helvetica Neue',sans-serif;}
+  .wa-chat-header{background:#202c33;padding:10px 12px;display:flex;align-items:center;gap:10px;}
+  .wa-chat-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;}
+  .wa-chat-name{font-size:13px;font-weight:600;color:#e9edef;}
+  .wa-chat-company{font-size:11px;color:#8696a0;}
+  .wa-chat-body{padding:8px 10px;display:flex;flex-direction:column;gap:4px;background:#0b141a;min-height:240px;}
+  .wa-date-chip{text-align:center;margin:4px 0;}
+  .wa-date-chip span{background:#182229;color:#8696a0;font-size:10px;padding:2px 8px;border-radius:6px;}
+  .wa-bubble{max-width:84%;padding:5px 8px 16px;font-size:12px;line-height:1.5;position:relative;border-radius:6px;word-break:break-word;color:#e9edef;}
+  .wa-in{background:#202c33;align-self:flex-start;border-radius:0 6px 6px 6px;}
+  .wa-out{background:#005c4b;align-self:flex-end;border-radius:6px 6px 0 6px;}
+  .wa-ts{position:absolute;bottom:3px;right:7px;font-size:9px;color:#8696a0;}
+  .wa-tick{color:#53bdeb;font-size:9px;}
   .wa-note{text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--cream);opacity:0.25;font-style:italic;}
 
   /* CTA */
@@ -89,8 +91,7 @@
   footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
   .footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
 
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-  .reveal.visible{opacity:1;transform:none;}
+  .reveal{opacity:1;transform:none;}
 
   @media(max-width:900px){
     nav,footer{padding-left:1.5rem;padding-right:1.5rem;}
@@ -300,144 +301,132 @@
     <h2 class="wa-title">Obrolan <em>WhatsApp Asli</em></h2>
     <p class="wa-sub">Chat langsung dari klien kami — apa adanya, tanpa rekayasa.</p>
   </div>
+
+  <!-- ROW 1 -->
   <div class="wa-grid reveal">
-
-    <!-- CHAT 1 — Erni Kurniawati, Bank Indonesia -->
     <div class="wa-chat-card">
-      <div class="wa-chat-header">
-        <div class="wa-chat-avatar">EK</div>
-        <div>
-          <div class="wa-chat-name">Erni Kurniawati</div>
-          <div class="wa-chat-company">Bank Indonesia</div>
-        </div>
-      </div>
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#1e6b55;">EK</div><div><div class="wa-chat-name">Erni Kurniawati</div><div class="wa-chat-company">Bank Indonesia</div></div></div>
       <div class="wa-chat-body">
-        <div class="wa-msg wa-msg-in">
-          <span>Halo, sy mau tanya untuk pembuatan backpack korporat, min order berapa ya?</span>
-          <span class="wa-time">09.14</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Halo Bu, min order kami 100 pcs per model. Untuk backpack korporat biasanya kami kerjakan dari bahan cordura atau polyester, tergantung budget dan kebutuhan. Boleh sy tahu kira-kira kebutuhannya untuk acara apa Bu?</span>
-          <span class="wa-time">09.17</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Untuk kebutuhan internal Bank Indonesia, sekitar 300 pcs. Deadline sekitar 3 minggu lagi bisa?</span>
-          <span class="wa-time">09.21</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Bisa Bu, 300 pcs dengan waktu 3 minggu masih aman asal desain dan bahan sudah fix dalam 2-3 hari ke depan. Boleh sy kirimkan form spesifikasi dulu?</span>
-          <span class="wa-time">09.23</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Oke silakan. Btw sample dulu bisa ya sebelum produksi massal?</span>
-          <span class="wa-time">09.25</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Tentu Bu, kami selalu buat sample dulu sebelum produksi massal. Sample selesai 3-5 hari kerja. Kalau sudah acc baru kami lanjut produksi.</span>
-          <span class="wa-time">09.26</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Oke noted. Lanjut ya</span>
-          <span class="wa-time">09.27</span>
-        </div>
-        <div class="wa-msg wa-msg-in wa-msg-last">
-          <span>Alhamdulillah barang sudah diterima semua, sesuai sama sample. Makasih ya 🙏</span>
-          <span class="wa-time">14.03</span>
-        </div>
+        <div class="wa-date-chip"><span>kemarin</span></div>
+        <div class="wa-bubble wa-out">Bu Erni, produksi 300 pcs backpack sudah selesai. Ini foto hasil akhirnya ya Bu 🙏<span class="wa-ts">10.14 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-out">[Foto: backpack_BI_final.jpg]<span class="wa-ts">10.15 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">ok bagus sesuai. sy transfer pelunasannya skrg ya<span class="wa-ts">10.44</span></div>
+        <div class="wa-bubble wa-out">Sudah masuk Bu, terimakasih 🙏 Barang diantar hari ini ya<span class="wa-ts">11.02 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-date-chip"><span>hari ini</span></div>
+        <div class="wa-bubble wa-in">barangnya udah sampe semua. makasih ya, sesuai sama sampelnya 🙏<span class="wa-ts">14.03</span></div>
+        <div class="wa-bubble wa-out">Alhamdulillah, terimakasih Bu Erni 🙏<span class="wa-ts">14.10 <span class="wa-tick">✓✓</span></span></div>
       </div>
     </div>
-
-    <!-- CHAT 2 — Kenny Hogan, FamilyMart -->
     <div class="wa-chat-card">
-      <div class="wa-chat-header">
-        <div class="wa-chat-avatar">KH</div>
-        <div>
-          <div class="wa-chat-name">Kenny Hogan</div>
-          <div class="wa-chat-company">FamilyMart Indonesia</div>
-        </div>
-      </div>
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#4a3890;">KH</div><div><div class="wa-chat-name">Kenny Hogan</div><div class="wa-chat-company">FamilyMart Indonesia</div></div></div>
       <div class="wa-chat-body">
-        <div class="wa-msg wa-msg-in">
-          <span>Halo min, saya dari procurement FamilyMart. Mau tanya bisa buat tote bag non-woven dengan printing logo? Qty sekitar 500 pcs</span>
-          <span class="wa-time">10.32</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Halo Pak Kenny, bisa. Non-woven dengan sablon logo kami kerjakan rutin. Untuk 500 pcs harga lebih kompetitif. Ukuran dan warna dasar sudah ada referensinya?</span>
-          <span class="wa-time">10.35</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Ada, sy kirim filenya ya</span>
-          <span class="wa-time">10.36</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Siap Pak, ditunggu 🙏</span>
-          <span class="wa-time">10.36</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>[File: FM_totebag_ref.pdf]</span>
-          <span class="wa-time">10.38</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Sudah sy cek Pak. Bisa dikerjakan. Untuk estimasi harga sy proses dulu ya, nanti sy hubungi kembali dalam 1x24 jam.</span>
-          <span class="wa-time">10.45</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Oke thanks</span>
-          <span class="wa-time">10.46</span>
-        </div>
-        <div class="wa-msg wa-msg-in wa-msg-last">
-          <span>Pesanan sudah sampai. Kualitasnya oke, sesuai ekspektasi. Nanti kalau ada kebutuhan lagi kami order lagi</span>
-          <span class="wa-time">16.22</span>
-        </div>
+        <div class="wa-date-chip"><span>3 minggu lalu</span></div>
+        <div class="wa-bubble wa-in">halo min, pesanan totebag 500pcs udah kami terima semua<span class="wa-ts">09.17</span></div>
+        <div class="wa-bubble wa-out">Alhamdulillah, terimakasih Pak Kenny 🙏 Kondisi barangnya oke?<span class="wa-ts">09.22 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">iya bagus, rapih. tim kami suka hasilnya<span class="wa-ts">09.25</span></div>
+        <div class="wa-bubble wa-in">btw prosesnya enak, ga ribet. next order sini lagi<span class="wa-ts">09.26</span></div>
+        <div class="wa-bubble wa-out">Wah senang dengernya Pak 😊 Kami tunggu order berikutnya!<span class="wa-ts">09.31 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-date-chip"><span>hari ini</span></div>
+        <div class="wa-bubble wa-in">min mau order lagi nih 500pcs model yg sama, bisa?<span class="wa-ts">10.05</span></div>
+        <div class="wa-bubble wa-out">Bisa Pak, dengan senang hati 🙏<span class="wa-ts">10.08 <span class="wa-tick">✓✓</span></span></div>
       </div>
     </div>
-
-    <!-- CHAT 3 — Hasyim Latief, CV Sroja -->
     <div class="wa-chat-card">
-      <div class="wa-chat-header">
-        <div class="wa-chat-avatar">HL</div>
-        <div>
-          <div class="wa-chat-name">Hasyim Latief</div>
-          <div class="wa-chat-company">CV Sroja Inti Persada</div>
-        </div>
-      </div>
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#7d3c0f;">HL</div><div><div class="wa-chat-name">Hasyim Latief</div><div class="wa-chat-company">CV Sroja Inti Persada</div></div></div>
       <div class="wa-chat-body">
-        <div class="wa-msg wa-msg-in">
-          <span>Selamat siang, saya mau order tas seminar 200 pcs. Bisa bantu?</span>
-          <span class="wa-time">13.10</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Selamat siang Pak, bisa. Untuk tas seminar kami punya beberapa pilihan model. Boleh sy tahu acaranya kapan dan materialnya mau yang seperti apa?</span>
-          <span class="wa-time">13.13</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Acaranya bulan depan, material terserah asal tidak murahan. Budget sekitar 35-40rb per pcs</span>
-          <span class="wa-time">13.17</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Di range itu bisa dapat bahan spunbond premium atau ripstop dengan sablon 1-2 warna Pak. Sy kirimkan beberapa referensi ya</span>
-          <span class="wa-time">13.20</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Silakan</span>
-          <span class="wa-time">13.21</span>
-        </div>
-        <div class="wa-msg wa-msg-in">
-          <span>Yang nomor 2 cocok. Lanjut ke proses selanjutnya gimana?</span>
-          <span class="wa-time">13.35</span>
-        </div>
-        <div class="wa-msg wa-msg-out">
-          <span>Baik Pak, berarti kita mulai dari pembuatan sample dulu. Saya kirimkan invoice commitment fee sample ya, nanti refund 100% kalau lanjut produksi.</span>
-          <span class="wa-time">13.38</span>
-        </div>
-        <div class="wa-msg wa-msg-in wa-msg-last">
-          <span>Barang sudah diterima. Sesuai sama yang dijanjikan. Terima kasih, profesional.</span>
-          <span class="wa-time">09.05</span>
-        </div>
+        <div class="wa-date-chip"><span>15 Feb 2025</span></div>
+        <div class="wa-bubble wa-out">Pak Hasyim, tas seminarnya udah ready. Mau diantar hari ini apa besok?<span class="wa-ts">13.45 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">hari ini aja min klo bisa, jam brp kira2?<span class="wa-ts">13.52</span></div>
+        <div class="wa-bubble wa-out">Oke, kami kirim pakai Lalamove sekitar jam 3an ya Pak 🙏<span class="wa-ts">13.55 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">oke sip<span class="wa-ts">13.56</span></div>
+        <div class="wa-bubble wa-in">udah sampe. thanks ya min, sesuai sm yg dijanjiin<span class="wa-ts">16.38</span></div>
+        <div class="wa-date-chip"><span>3 Apr 2025</span></div>
+        <div class="wa-bubble wa-in">min, mau repeat order lg nih 150pcs. proses nya sama kan?<span class="wa-ts">10.17</span></div>
+        <div class="wa-bubble wa-out">Sama Pak, langsung mulai dari spek aja 🙏<span class="wa-ts">10.21 <span class="wa-tick">✓✓</span></span></div>
       </div>
     </div>
-
   </div>
+
+  <!-- ROW 2 -->
+  <div class="wa-grid reveal" style="margin-top:1.5rem;">
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#1a5276;">IH</div><div><div class="wa-chat-name">Ida Haryani</div><div class="wa-chat-company">APJATEL</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>2 minggu lalu</span></div>
+        <div class="wa-bubble wa-in">Selamat siang, ingin konfirmasi bahwa barang pesanan kami sudah diterima dengan baik.<span class="wa-ts">13.05</span></div>
+        <div class="wa-bubble wa-out">Alhamdulillah Bu Ida, terima kasih konfirmasinya 🙏 Kondisi barangnya semuanya oke?<span class="wa-ts">13.12 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">Iya sesuai semua dengan sampel. Tim kami cukup puas dengan hasilnya.<span class="wa-ts">13.15</span></div>
+        <div class="wa-bubble wa-in">Kalau ada kebutuhan lagi nanti kami akan order kembali di sini.<span class="wa-ts">13.16</span></div>
+        <div class="wa-bubble wa-out">Siap Bu, kami tunggu. Terima kasih sudah mempercayai kami 🙏<span class="wa-ts">13.19 <span class="wa-tick">✓✓</span></span></div>
+      </div>
+    </div>
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#117a65;">SP</div><div><div class="wa-chat-name">Sofia Puspita</div><div class="wa-chat-company">Healthygo Indonesia</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>kemarin</span></div>
+        <div class="wa-bubble wa-out">Bu Sofia, pesanan 150 pcs sudah selesai QC. Saya kirimkan fotonya ya Bu 🙏<span class="wa-ts">14.22 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-out">[Foto: pouch_healthygo_final.jpg]<span class="wa-ts">14.23 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">Baik, sudah saya lihat. Sesuai dengan yang kami minta. Saya proses pembayarannya sekarang.<span class="wa-ts">15.10</span></div>
+        <div class="wa-bubble wa-out">Sudah kami terima Bu, terima kasih 🙏 Barang akan kami antar sore ini.<span class="wa-ts">15.24 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-date-chip"><span>hari ini</span></div>
+        <div class="wa-bubble wa-in">Barang sudah sampai, terima kasih. Pengerjaannya rapi dan tepat waktu.<span class="wa-ts">10.03</span></div>
+      </div>
+    </div>
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#6c3483;">VL</div><div><div class="wa-chat-name">Bu Velda</div><div class="wa-chat-company">Uninet Media Sakti</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>10 Mar 2025</span></div>
+        <div class="wa-bubble wa-in">halo min barang udah sampe nih<span class="wa-ts">11.27</span></div>
+        <div class="wa-bubble wa-out">Alhamdulillah Bu Velda 🙏 Semua oke?<span class="wa-ts">11.35 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">iya oke. awalnya sy rada khawatir krn ini pertama kali order sini, tp hasilnya diluar ekspektasi<span class="wa-ts">11.38</span></div>
+        <div class="wa-bubble wa-in">jahitannya rapih, bahan jg bagus. worth it<span class="wa-ts">11.39</span></div>
+        <div class="wa-bubble wa-out">Wah seneng banget denger itu Bu 😊 Makasih udah percaya sama kami!<span class="wa-ts">11.42 <span class="wa-tick">✓✓</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="wa-grid reveal" style="margin-top:1.5rem;">
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#b7950b;">KD</div><div><div class="wa-chat-name">Kezhia Devi</div><div class="wa-chat-company">Bethesda Church</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>minggu lalu</span></div>
+        <div class="wa-bubble wa-in">hii min mau bilang makasih ya, totebag nya udah dipake di acara gereja kami kemarin<span class="wa-ts">19.03</span></div>
+        <div class="wa-bubble wa-out">Halo Kak Kezhia, wah seneng banget dengernya 😊 Acaranya lancar?<span class="wa-ts">19.15 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">lancar kok, jemaat pada suka sama tasnya. lucu dan bagus kualitasnya<span class="wa-ts">19.17</span></div>
+        <div class="wa-bubble wa-in">next event mau order lagi nih, model beda. bisa konsultasi dulu?<span class="wa-ts">19.18</span></div>
+        <div class="wa-bubble wa-out">Bisa banget Kak, kapan aja chat sini ya 🙏<span class="wa-ts">19.21 <span class="wa-tick">✓✓</span></span></div>
+      </div>
+    </div>
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#922b21;">RS</div><div><div class="wa-chat-name">Rio Saputra</div><div class="wa-chat-company">Tzu Chi School</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>3 Feb 2025</span></div>
+        <div class="wa-bubble wa-in">Halo, pesanan tas sudah kami terima dan sudah kami cek semua.<span class="wa-ts">13.41</span></div>
+        <div class="wa-bubble wa-out">Alhamdulillah Pak Rio, terima kasih kabarnya 🙏 Semuanya sesuai?<span class="wa-ts">13.46 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">Iya sesuai, tidak ada yang cacat. Prosesnya juga cukup mudah dan tidak berbelit.<span class="wa-ts">13.50</span></div>
+        <div class="wa-bubble wa-out">Terima kasih Pak, senang bisa membantu 🙏<span class="wa-ts">13.54 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-date-chip"><span>1 Apr 2025</span></div>
+        <div class="wa-bubble wa-in">Halo min, mau order lagi 200 pcs untuk tahun ajaran baru. Prosesnya sama seperti sebelumnya?<span class="wa-ts">09.55</span></div>
+        <div class="wa-bubble wa-out">Sama Pak, langsung ke spesifikasi aja. Siap kami proses 🙏<span class="wa-ts">10.01 <span class="wa-tick">✓✓</span></span></div>
+      </div>
+    </div>
+    <div class="wa-chat-card">
+      <div class="wa-chat-header"><div class="wa-chat-avatar" style="background:#1a5276;">HR</div><div><div class="wa-chat-name">Heri</div><div class="wa-chat-company">Inti Katamata</div></div></div>
+      <div class="wa-chat-body">
+        <div class="wa-date-chip"><span>5 Mar 2025</span></div>
+        <div class="wa-bubble wa-in">min barang udah diterima<span class="wa-ts">15.02</span></div>
+        <div class="wa-bubble wa-out">Terima kasih Pak Heri 🙏 Semuanya oke?<span class="wa-ts">15.10 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">oke. sesuai<span class="wa-ts">15.11</span></div>
+        <div class="wa-bubble wa-out">Siap, makasih ya Pak 🙏<span class="wa-ts">15.14 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-date-chip"><span>2 Apr 2025</span></div>
+        <div class="wa-bubble wa-in">min order lagi dong, 100pcs model yg sama<span class="wa-ts">10.22</span></div>
+        <div class="wa-bubble wa-out">Siap Pak, langsung proses ya 🙏<span class="wa-ts">10.25 <span class="wa-tick">✓✓</span></span></div>
+        <div class="wa-bubble wa-in">ok<span class="wa-ts">10.26</span></div>
+      </div>
+    </div>
+  </div>
+
   <p class="wa-note reveal">Chat ditampilkan seizin klien · Nama ditampilkan sesuai persetujuan</p>
 </div>
 
