@@ -7,150 +7,86 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#0D1B2A;--navy-mid:#1A2F45;--navy-light:#243B55;--cream:#F5F0E8;--gold:#F5C842;--gold-light:#FFE9A0;--gold-shadow:#D4A830;--white:#FDFBF7;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--navy);color:var(--cream);font-family:var(--font-body);font-weight:300;overflow-x:hidden;}
-
-  nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(13,27,42,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,200,66,0.15);}
-  .nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
-  .nav-logo-svg{width:36px;height:36px;flex-shrink:0;}
-  .nav-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;}
-  .nav-links{display:flex;gap:2rem;list-style:none;}
-  .nav-links a{color:var(--cream);text-decoration:none;font-size:0.82rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;transition:opacity 0.2s;}
-  .nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold-light);}
-  .nav-cta{background:var(--gold);color:var(--navy);padding:0.55rem 1.2rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;}
-  .nav-cta:hover{background:var(--gold-light);}
-
-  .faq-hero{background:var(--navy-mid);padding:5rem 3rem 4rem;border-bottom:1px solid rgba(245,200,66,0.1);}
-  .faq-label{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
-  .faq-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.0;color:var(--white);}
-  .faq-title em{font-style:normal;color:var(--gold);}
-  .faq-sub{font-size:0.95rem;color:var(--cream);opacity:0.55;margin-top:0.75rem;max-width:520px;line-height:1.7;}
-
-  .faq-body{padding:5rem 3rem;}
-  .faq-layout{display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start;}
-  .faq-sidebar{position:sticky;top:7rem;}
-  .faq-sidebar-title{font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream);opacity:0.35;margin-bottom:1.25rem;}
-  .faq-cat-list{display:flex;flex-direction:column;gap:0;}
-  .faq-cat-btn{background:transparent;border:none;text-align:left;padding:0.75rem 1rem;font-size:0.85rem;font-family:var(--font-body);color:var(--cream);opacity:0.5;cursor:pointer;transition:all 0.2s;border-left:2px solid transparent;letter-spacing:0.02em;}
-  .faq-cat-btn:hover{opacity:0.85;border-left-color:rgba(245,200,66,0.3);}
-  .faq-cat-btn.active{opacity:1;color:var(--gold);border-left-color:var(--gold);background:rgba(245,200,66,0.05);}
-  .faq-cta-box{margin-top:2.5rem;background:var(--gold);padding:1.75rem;}
-  .faq-cta-box-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
-  .faq-cta-box-text{font-size:0.82rem;color:var(--navy);opacity:0.7;line-height:1.6;margin-bottom:1.25rem;}
-  .btn-dark{background:var(--navy);color:var(--white);padding:0.7rem 1.4rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;display:inline-block;}
-  .btn-dark:hover{background:var(--navy-light);}
-
-  .faq-section{margin-bottom:4rem;}
-  .faq-section:last-child{margin-bottom:0;}
-  .faq-section-title{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(245,200,66,0.15);display:flex;align-items:center;gap:0.75rem;}
-  .faq-section-icon{font-size:1.1rem;}
-  .faq-item{border-bottom:1px solid rgba(245,240,232,0.07);}
-  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;cursor:pointer;font-size:0.92rem;font-weight:400;color:var(--cream);gap:1rem;transition:color 0.2s;line-height:1.5;}
-  .faq-q:hover{color:var(--gold-light);}
-  .faq-toggle{width:26px;height:26px;border:1px solid rgba(200,146,58,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:1.3rem;line-height:1;transition:transform 0.3s,background 0.2s;}
-  .faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--gold);color:var(--navy);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;font-size:0.875rem;line-height:1.8;color:var(--cream);opacity:0.6;}
-  .faq-item.open .faq-a{max-height:400px;padding-bottom:1.25rem;}
-  .faq-a strong{color:var(--gold-light);font-weight:500;}
-
-  .faq-cta-band{background:var(--gold);padding:4rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;}
-  .cta-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:var(--navy);line-height:1.05;}
-  .cta-sub{font-size:0.95rem;color:var(--navy);opacity:0.65;margin-top:0.5rem;}
-
-  footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-  .footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
-
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-  
-
-  @media(max-width:900px){
-    nav{padding:1rem 1.5rem;}
-    .faq-hero{padding:3.5rem 1.5rem 3rem;}
-    .faq-body{padding:3rem 1.5rem;}
-    .faq-layout{grid-template-columns:1fr;gap:2rem;}
-    .faq-sidebar{position:static;}
-    .faq-cta-band{flex-direction:column;align-items:flex-start;padding:3rem 1.5rem;}
-    footer{padding:1.5rem;}
-  }
-
-  .footer-socmed { display: flex; gap: 1rem; align-items: center; }
-  .socmed-link { color: var(--cream); opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; }
-  .socmed-link:hover { opacity: 1; }
-
-  @media (max-width: 900px) {
-    nav { padding: 0.9rem 1.5rem; }
-    .nav-links { display: none !important; }
-    .nav-hamburger { display: flex !important; }
-    .nav-cta { display: none; }
-  }
-
-    /* ===== MOBILE MENU FIX ===== */
-    .nav-mobile-menu {
-      display: none;
-      position: fixed;
-      top: 65px;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      background: rgba(13, 27, 42, 0.98);
-      backdrop-filter: blur(12px);
-      flex-direction: column;
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid rgba(245, 200, 66, 0.2);
-      gap: 0;
-    }
-    .nav-mobile-menu a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      transition: opacity 0.2s, color 0.2s;
-    }
-    .nav-mobile-menu a:last-child { border-bottom: none; }
-    .nav-mobile-menu a:hover,
-    .nav-mobile-menu a.active { opacity: 1; color: var(--gold-light); }
-    .nav-mobile-menu .nav-mobile-cta {
-      margin-top: 1rem;
-      color: var(--gold);
-      font-weight: 600;
-      opacity: 1;
-      border-bottom: none;
-    }
-    .nav-hamburger {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      align-items: center;
-      justify-content: center;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--cream);
-      transition: all 0.3s ease;
-      transform-origin: center;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .nav-mobile-menu.open { display: flex; }
-  </style>
+:root{--navy:#0D1B2A;--navy-mid:#1A2F45;--navy-light:#243B55;--cream:#F5F0E8;--gold:#F5C842;--gold-light:#FFE9A0;--gold-shadow:#D4A830;--white:#FDFBF7;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--cream);font-family:var(--font-body);font-weight:300;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(13,27,42,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,200,66,0.15);}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-logo-svg{width:36px;height:36px;flex-shrink:0;}
+.nav-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:0.82rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;transition:opacity 0.2s;}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold-light);}
+.nav-cta{background:var(--gold);color:var(--navy);padding:0.55rem 1.2rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;}
+.nav-cta:hover{background:var(--gold-light);}
+.faq-hero{background:var(--navy-mid);padding:5rem 3rem 4rem;border-bottom:1px solid rgba(245,200,66,0.1);}
+.faq-label{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+.faq-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.0;color:var(--white);}
+.faq-title em{font-style:normal;color:var(--gold);}
+.faq-sub{font-size:0.95rem;color:var(--cream);opacity:0.55;margin-top:0.75rem;max-width:520px;line-height:1.7;}
+.faq-body{padding:5rem 3rem;}
+.faq-layout{display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start;}
+.faq-sidebar{position:sticky;top:7rem;}
+.faq-sidebar-title{font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream);opacity:0.35;margin-bottom:1.25rem;}
+.faq-cat-list{display:flex;flex-direction:column;gap:0;}
+.faq-cat-btn{background:transparent;border:none;text-align:left;padding:0.75rem 1rem;font-size:0.85rem;font-family:var(--font-body);color:var(--cream);opacity:0.5;cursor:pointer;transition:all 0.2s;border-left:2px solid transparent;letter-spacing:0.02em;}
+.faq-cat-btn:hover{opacity:0.85;border-left-color:rgba(245,200,66,0.3);}
+.faq-cat-btn.active{opacity:1;color:var(--gold);border-left-color:var(--gold);background:rgba(245,200,66,0.05);}
+.faq-cta-box{margin-top:2.5rem;background:var(--gold);padding:1.75rem;}
+.faq-cta-box-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.faq-cta-box-text{font-size:0.82rem;color:var(--navy);opacity:0.7;line-height:1.6;margin-bottom:1.25rem;}
+.btn-dark{background:var(--navy);color:var(--white);padding:0.7rem 1.4rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;display:inline-block;}
+.btn-dark:hover{background:var(--navy-light);}
+.faq-section{margin-bottom:4rem;}
+.faq-section:last-child{margin-bottom:0;}
+.faq-section-title{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(245,200,66,0.15);display:flex;align-items:center;gap:0.75rem;}
+.faq-section-icon{font-size:1.1rem;}
+.faq-item{border-bottom:1px solid rgba(245,240,232,0.07);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;cursor:pointer;font-size:0.92rem;font-weight:400;color:var(--cream);gap:1rem;transition:color 0.2s;line-height:1.5;}
+.faq-q:hover{color:var(--gold-light);}
+.faq-toggle{width:26px;height:26px;border:1px solid rgba(200,146,58,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:1.3rem;line-height:1;transition:transform 0.3s,background 0.2s;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--gold);color:var(--navy);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;font-size:0.875rem;line-height:1.8;color:var(--cream);opacity:0.6;}
+.faq-item.open .faq-a{max-height:500px;padding-bottom:1.25rem;}
+.faq-a strong{color:var(--gold-light);font-weight:500;}
+.faq-cta-band{background:var(--gold);padding:4rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;}
+.cta-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:var(--navy);line-height:1.05;}
+.cta-sub{font-size:0.95rem;color:var(--navy);opacity:0.65;margin-top:0.5rem;}
+footer{background:#08121C;padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-txt{font-size:0.74rem;color:var(--cream);opacity:0.28;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .faq-hero{padding:3.5rem 1.5rem 3rem;}
+  .faq-body{padding:3rem 1.5rem;}
+  .faq-layout{grid-template-columns:1fr;gap:2rem;}
+  .faq-sidebar{position:static;}
+  .faq-cta-band{flex-direction:column;align-items:flex-start;padding:3rem 1.5rem;}
+  footer{padding:1.5rem;}
+}
+.footer-socmed{display:flex;gap:1rem;align-items:center;}
+.socmed-link{color:var(--cream);opacity:0.4;transition:opacity 0.2s;display:flex;align-items:center;}
+.socmed-link:hover{opacity:1;}
+@media(max-width:900px){
+  nav{padding:0.9rem 1.5rem;}
+  .nav-links{display:none!important;}
+  .nav-hamburger{display:flex!important;}
+  .nav-cta{display:none;}
+}
+.nav-mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;z-index:99;background:rgba(13,27,42,0.98);backdrop-filter:blur(12px);flex-direction:column;padding:1.5rem 2rem;border-bottom:1px solid rgba(245,200,66,0.2);gap:0;}
+.nav-mobile-menu a{color:var(--cream);text-decoration:none;font-size:0.9rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;opacity:0.8;padding:0.85rem 0;border-bottom:1px solid rgba(255,255,255,0.07);transition:opacity 0.2s,color 0.2s;}
+.nav-mobile-menu a:last-child{border-bottom:none;}
+.nav-mobile-menu a:hover,.nav-mobile-menu a.active{opacity:1;color:var(--gold-light);}
+.nav-mobile-menu .nav-mobile-cta{margin-top:1rem;color:var(--gold);font-weight:600;opacity:1;border-bottom:none;}
+.nav-hamburger{background:none;border:none;cursor:pointer;padding:6px;display:none;flex-direction:column;gap:5px;align-items:center;justify-content:center;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--cream);transition:all 0.3s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-menu.open{display:flex;}
+</style>
 </head>
 <body>
 
@@ -194,6 +130,7 @@
   </button>
   <a href="https://wa.me/6281262222911?text=Halo%20Admin%20Paus%20Konveksi" class="nav-cta" target="_blank">Konsultasi Gratis</a>
 </nav>
+
 <div class="nav-mobile-menu" id="navMobileMenu">
   <a href="index.html#services">Layanan</a>
   <a href="katalog.html">Katalog</a>
@@ -213,6 +150,8 @@
 
 <div class="faq-body">
   <div class="faq-layout">
+
+    <!-- SIDEBAR -->
     <div class="faq-sidebar reveal">
       <div class="faq-sidebar-title">Kategori</div>
       <div class="faq-cat-list">
@@ -222,6 +161,8 @@
         <button class="faq-cat-btn" onclick="scrollToSection('produksi',this)">Pembayaran & Produksi</button>
         <button class="faq-cat-btn" onclick="scrollToSection('qc',this)">Quality Control</button>
         <button class="faq-cat-btn" onclick="scrollToSection('pengiriman',this)">Pengiriman</button>
+        <button class="faq-cat-btn" onclick="scrollToSection('bahan',this)">Bahan & Material</button>
+        <button class="faq-cat-btn" onclick="scrollToSection('kerjasama',this)">Kerjasama & Lainnya</button>
       </div>
       <div class="faq-cta-box">
         <div class="faq-cta-box-title">Masih ada pertanyaan?</div>
@@ -231,120 +172,236 @@
     </div>
 
     <div>
+
       <!-- KONSULTASI -->
       <div class="faq-section reveal" id="konsultasi">
         <div class="faq-section-title"><span class="faq-section-icon">💬</span> Konsultasi & Spesifikasi</div>
 
         <div class="faq-item open">
           <div class="faq-q" onclick="toggleFaq(this)">Berapa minimum order di Paus Konveksi? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Minimum order kami adalah <strong>100 pcs per model</strong>. Kami fokus melayani perusahaan, instansi, dan brand yang membutuhkan produksi dalam jumlah besar. Untuk kebutuhan di bawah 100 pcs, saat ini kami belum bisa melayani.</div>
+          <div class="faq-a">Minimum order kami berbeda tergantung jenis tas:<br><br>
+            • <strong>Tas biasa (backpack, tote bag, sling bag, dll): minimal 100 pcs per model</strong><br>
+            • <strong>Tas spunbond (goodie bag, shopping bag, dll): minimal 300 pcs per model</strong><br><br>
+            Kami fokus melayani perusahaan, instansi, dan brand yang membutuhkan produksi dalam jumlah besar. Untuk kebutuhan di bawah minimum order, saat ini kami belum bisa melayani.
+          </div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah semua jenis tas bisa diproduksi? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Kami memproduksi hampir semua jenis tas: <strong>backpack, tote bag, goodie bag, tas laptop, sling bag, pouch, drawstring bag, hingga tas travel dan duffel bag</strong>. Selama desain memungkinkan secara teknis, kami siap mengerjakan.</div>
+          <div class="faq-a">Kami memproduksi hampir semua jenis tas: <strong>backpack, tote bag, goodie bag spunbond, tas laptop, sling bag, pouch, drawstring bag, hingga tas travel dan duffel bag</strong>. Selama desain memungkinkan secara teknis, kami siap mengerjakan.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara memulai konsultasi? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Sangat mudah! Anda bisa menghubungi kami via <strong>WhatsApp, email, atau datang langsung</strong> ke workshop kami. Sampaikan kebutuhan Anda — model tas, ukuran, jumlah, dan target waktu — dan tim kami akan merespons dalam 1×24 jam kerja.</div>
+          <div class="faq-a">Sangat mudah! Anda bisa menghubungi kami via <strong>WhatsApp, email, atau datang langsung</strong> ke workshop kami di Kapuk Muara, Jakarta Utara. Sampaikan kebutuhan Anda — model tas, ukuran, jumlah, dan target waktu — dan tim kami akan merespons dalam 1×24 jam kerja.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Informasi apa yang perlu disiapkan sebelum konsultasi? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Semakin detail informasi yang Anda berikan, semakin akurat penawaran yang kami berikan. Idealnya siapkan: <strong>model dan fungsi tas, ukuran (P×L×T), jenis bahan, warna, jumlah pesanan, metode branding logo, dan target waktu</strong>. Belum punya semua informasi ini? Tidak masalah — kami bisa bantu menentukan bersama.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa membuat desain dari awal tanpa referensi? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Tentu! Kami menyediakan layanan <strong>free konsultasi desain</strong>. Anda cukup sampaikan fungsi yang diinginkan, target pengguna, dan preferensi estetika — tim desainer kami akan membantu mewujudkannya menjadi produk nyata.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah Paus Konveksi hanya melayani perusahaan besar? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Tidak. Kami melayani <strong>berbagai skala — mulai dari UMKM, startup, komunitas, hingga korporasi besar</strong>. Selama jumlah pesanan memenuhi minimum order, kami siap melayani dengan standar kualitas yang sama.</div>
         </div>
       </div>
 
       <!-- HARGA -->
       <div class="faq-section reveal" id="harga">
         <div class="faq-section-title"><span class="faq-section-icon">💰</span> Harga & Penawaran</div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Kapan harga akan diberikan? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Harga akan diberikan setelah <strong>seluruh spesifikasi disepakati secara jelas dan tertulis</strong>. Kami tidak memberikan harga perkiraan yang kemudian berubah — harga yang kami berikan adalah harga final.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apa saja faktor yang mempengaruhi harga? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Harga dipengaruhi oleh: <strong>jenis dan kualitas bahan, ukuran tas, tingkat kerumitan desain, metode branding logo (sablon/bordir/emboss), jumlah pesanan, dan target waktu produksi</strong>. Semakin besar jumlah order, semakin kompetitif harga per pcs-nya.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah ada diskon untuk order besar? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Ya, <strong>harga per pcs akan lebih kompetitif untuk order dengan volume lebih besar</strong>. Detail harga berdasarkan volume akan disampaikan saat konsultasi setelah spesifikasi disepakati.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah harga yang diberikan sudah termasuk ongkir? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Harga produksi yang kami berikan <strong>belum termasuk ongkos kirim</strong>, kecuali untuk pengiriman area Jakarta dengan total order di atas Rp5.000.000 yang sudah kami gratiskan. Untuk pengiriman ke luar Jakarta atau di bawah nominal tersebut, biaya kirim akan dihitung terpisah.</div>
         </div>
       </div>
 
       <!-- SAMPLE -->
       <div class="faq-section reveal" id="sample">
         <div class="faq-section-title"><span class="faq-section-icon">🧪</span> Sample Produk</div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Mengapa perlu membuat sample terlebih dahulu? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Sample adalah <strong>acuan utama untuk bentuk, bahan, warna, dan kualitas</strong> sebelum masuk ke produksi massal. Ini melindungi kepentingan Anda — memastikan produk jadi sesuai dengan yang Anda bayangkan.</div>
+          <div class="faq-a">Sample adalah <strong>acuan utama untuk bentuk, bahan, warna, dan kualitas</strong> sebelum masuk ke produksi massal. Ini melindungi kepentingan Anda — memastikan produk jadi sesuai dengan yang Anda bayangkan, dan menghindari potensi ketidaksesuaian di tengah produksi.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Berapa biaya dan waktu pembuatan sample? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Ada <strong>commitment fee sebesar Rp500.000 per pcs sample</strong> sebagai jaminan keseriusan. Biaya ini dikembalikan 100% jika Anda melanjutkan ke produksi massal. Waktu pembuatan sample estimasi <strong>3–7 hari kerja</strong> tergantung tingkat kerumitan desain.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa revisi sample? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Ya, tersedia <strong>maksimal 2 kali revisi</strong> dalam satu siklus pembuatan sample, selama revisi masih memungkinkan pada tas yang sudah dibuat.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah perusahaan mendapat free sample? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Untuk <strong>perusahaan dan instansi</strong> dengan kriteria tertentu, tersedia skema free sample dengan ketentuan khusus yang akan dijelaskan saat konsultasi.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Bolehkah saya mengirim referensi tas dari brand lain? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Boleh. Referensi dari brand lain sangat membantu kami memahami selera Anda. Namun perlu dicatat, kami <strong>tidak menyalin produk bermerek secara identik</strong>. Referensi digunakan sebagai inspirasi untuk kemudian diadaptasi sesuai kebutuhan dan spesifikasi Anda.</div>
         </div>
       </div>
 
       <!-- PRODUKSI -->
       <div class="faq-section reveal" id="produksi">
         <div class="faq-section-title"><span class="faq-section-icon">🏭</span> Pembayaran & Produksi</div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Bagaimana sistem pembayaran? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Pembayaran dilakukan dalam dua tahap: <strong>Down Payment (DP) setelah sample dan harga disetujui</strong>, dan pelunasan setelah Anda menyatakan puas dengan hasil produksi. DP yang telah dibayar tidak dapat dikembalikan.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Berapa lama waktu produksi? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Estimasi umum waktu produksi:<br>• <strong>Di bawah 1.000 pcs:</strong> ±10–14 hari kerja<br>• <strong>1.000–5.000 pcs:</strong> ±21 hari kerja<br>• <strong>5.000–10.000 pcs:</strong> ±30 hari kerja<br>Estimasi final diberikan saat konsultasi setelah spesifikasi disepakati.</div>
+          <div class="faq-a">Estimasi umum waktu produksi:<br>
+            • <strong>Di bawah 1.000 pcs:</strong> ±10–14 hari kerja<br>
+            • <strong>1.000–5.000 pcs:</strong> ±21 hari kerja<br>
+            • <strong>5.000–10.000 pcs:</strong> ±30 hari kerja<br>
+            Estimasi final diberikan saat konsultasi setelah spesifikasi disepakati.
+          </div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa minta produksi lebih cepat (rush order)? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Tergantung antrian produksi yang sedang berjalan. Silakan konsultasikan kebutuhan Anda sedini mungkin — <strong>semakin awal Anda menghubungi kami, semakin besar kemungkinan kami bisa mengakomodasi target waktu Anda</strong>.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah proses produksi bisa dipantau? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Ya. Kami secara rutin mengirimkan <strong>update progress produksi via WhatsApp</strong>, termasuk foto dan video setiap milestone penting. Anda juga dipersilakan datang langsung ke workshop kami untuk melihat langsung proses produksi berlangsung.</div>
         </div>
       </div>
 
       <!-- QC -->
       <div class="faq-section reveal" id="qc">
         <div class="faq-section-title"><span class="faq-section-icon">✅</span> Quality Control</div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Bagaimana proses quality control Anda? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Setiap produk melewati inspeksi kualitas sebelum dikemas. Kami menargetkan <strong>hasil produksi massal minimal 90% menyerupai sample yang disetujui</strong>. Perbedaan kecil bisa terjadi karena proses produksi manual, namun fungsi dan tampilan utama tetap mengacu pada sample.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara memverifikasi hasil produksi sebelum pelunasan? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Anda dapat <strong>datang langsung ke workshop</strong> untuk melihat hasil produksi, atau kami kirimkan <strong>dokumentasi foto dan video</strong> lengkap sebagai bukti produksi selesai sebelum pelunasan dilakukan.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah ada toleransi ukuran dalam produksi? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Ya. Karena proses produksi dilakukan secara <strong>handmade</strong>, terdapat toleransi ukuran <strong>±1–2 cm</strong> yang masih dianggap wajar dan tidak termasuk cacat produksi.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah ada garansi produk? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Kami menjamin setiap produk yang keluar dari workshop telah melewati proses QC. Jika ditemukan <strong>cacat produksi yang terbukti adalah kesalahan dari pihak kami</strong> (bukan karena pemakaian), kami siap menindaklanjuti sesuai kesepakatan — termasuk penggantian unit yang cacat.</div>
         </div>
       </div>
 
       <!-- PENGIRIMAN -->
       <div class="faq-section reveal" id="pengiriman">
         <div class="faq-section-title"><span class="faq-section-icon">🚚</span> Pengiriman</div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa mengirim ke luar Jakarta? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Ya, kami melayani pengiriman ke <strong>seluruh Indonesia</strong>. Kami sudah memiliki klien dari Jakarta, Bandung, Surabaya, Bali, Medan, Makassar, hingga Papua.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah ada biaya ongkos kirim? <span class="faq-toggle">+</span></div>
-          <div class="faq-a"><strong>Gratis ongkir untuk total order di atas Rp10.000.000</strong>. Untuk order di bawah nominal tersebut, biaya kirim sesuai ekspedisi yang disepakati bersama.</div>
+          <div class="faq-a"><strong>Gratis ongkir untuk pengiriman area Jakarta dengan total order di atas Rp5.000.000</strong>. Untuk pengiriman ke luar Jakarta atau order di bawah nominal tersebut, biaya kirim sesuai ekspedisi yang disepakati bersama.</div>
         </div>
+
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa menggunakan ekspedisi pilihan sendiri? <span class="faq-toggle">+</span></div>
           <div class="faq-a">Bisa, selama disepakati bersama. Anda bisa menentukan ekspedisi pilihan Anda, termasuk menggunakan rekening pengiriman perusahaan Anda sendiri jika diperlukan.</div>
         </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa ambil sendiri (pickup) ke workshop? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Tentu! Anda bisa mengambil pesanan langsung ke workshop kami di <strong>Kapuk Muara, Jakarta Utara</strong>. Silakan koordinasi jadwal pengambilan terlebih dahulu agar tim kami bisa menyiapkan pesanan Anda dengan baik.</div>
+        </div>
       </div>
+
+      <!-- BAHAN -->
+      <div class="faq-section reveal" id="bahan">
+        <div class="faq-section-title"><span class="faq-section-icon">🧵</span> Bahan & Material</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Bahan apa saja yang tersedia di Paus Konveksi? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Kami menyediakan berbagai pilihan bahan, antara lain: <strong>Cordura, Oxford, Polyester, Canvas, Nylon, Spunbond, D300, Parasut, dan bahan-bahan khusus</strong> sesuai kebutuhan. Jika Anda memiliki bahan preferensi sendiri yang tidak ada di daftar, konsultasikan dengan tim kami.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa request warna bahan yang spesifik? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Bisa, dengan catatan ketersediaan warna tergantung dari stok supplier bahan. Untuk warna yang <strong>sangat spesifik atau custom dye</strong>, perlu waktu dan minimum order tersendiri. Konsultasikan lebih lanjut dengan tim kami untuk memastikan ketersediannya.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah bahan yang digunakan tahan air? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Tergantung pilihan bahan. Bahan seperti <strong>Cordura, Oxford, dan Nylon</strong> umumnya memiliki lapisan water resistant hingga waterproof tergantung kualitas dan treatment-nya. Jika ketahanan air adalah prioritas, sampaikan saat konsultasi agar kami bisa merekomendasikan bahan yang paling tepat.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa membawa bahan sendiri untuk diproduksi? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Bisa dalam kondisi tertentu. Kami perlu <strong>memeriksa kesesuaian bahan</strong> Anda dengan proses produksi kami terlebih dahulu. Hubungi kami dan kirimkan sampel bahan untuk dievaluasi sebelum proses produksi dimulai.</div>
+        </div>
+      </div>
+
+      <!-- KERJASAMA -->
+      <div class="faq-section reveal" id="kerjasama">
+        <div class="faq-section-title"><span class="faq-section-icon">🤝</span> Kerjasama & Lainnya</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah Paus Konveksi menerima reseller atau mitra? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Ya, kami terbuka untuk kerjasama dengan <strong>reseller, agen pengadaan, dan event organizer</strong> yang secara rutin membutuhkan produksi tas. Hubungi kami untuk mendiskusikan skema kerjasama yang saling menguntungkan.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah ada layanan desain grafis untuk logo di tas? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Kami dapat membantu <strong>finalisasi artwork</strong> untuk keperluan produksi (konversi ke format yang sesuai untuk sablon, bordir, dll). Untuk desain logo dari nol, kami rekomendasikan Anda menggunakan jasa desainer grafis tersendiri agar hasilnya lebih optimal.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah bisa melihat proses produksi secara langsung? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Tentu! Workshop kami berlokasi di <strong>Kapuk Muara, Jakarta Utara</strong>, dan kami terbuka untuk kunjungan. Silakan jadwalkan kunjungan terlebih dahulu via WhatsApp agar tim kami bisa menyambut Anda dengan baik.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara menghubungi Paus Konveksi? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Anda bisa menghubungi kami melalui:<br>
+            • <strong>WhatsApp:</strong> 0812 6222 2911<br>
+            • <strong>Email:</strong> hello@pauskonveksi.com<br>
+            • <strong>Kunjungan langsung:</strong> Kapuk Muara, Jakarta Utara (jadwalkan terlebih dahulu)<br>
+            Tim kami beroperasi Senin–Sabtu, pukul 08.00–17.00 WIB.
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -364,24 +421,44 @@
     <a href="https://tiktok.com/@pauskonveksitas" target="_blank" rel="noopener" style="color:var(--cream);opacity:0.4;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.4"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
     <a href="https://youtube.com/@pauskonveksitas" target="_blank" rel="noopener" style="color:var(--cream);opacity:0.4;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.4"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7s-.3-2-1.2-2.7c-1.1-1.2-2.4-1.2-3-1.3C16.6 3 12 3 12 3s-4.6 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.3v2c0 2.1.3 4.3.3 4.3s.3 2 1.2 2.7c1.1 1.2 2.6 1.1 3.3 1.2C7.5 21.7 12 21.7 12 21.7s4.6 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.7 1.2-2.7 1.2-2.7s.3-2.1.3-4.3v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/></svg></a>
   </div>
-  <span class="footer-txt">0812 6222 2911 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f383928680989c9d859698809ab3949e929a9fdd909c9e">[email&#160;protected]</a></span>
+  <span class="footer-txt">0812 6222 2911 · hello@pauskonveksi.com</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function toggleMenu() {
-      var btn = document.getElementById('navHamburger');
-      var menu = document.getElementById('navMobileMenu');
-      btn.classList.toggle('open');
-      menu.classList.toggle('open');
-    }
-    document.addEventListener('click', function(e) {
-      var btn = document.getElementById('navHamburger');
-      var menu = document.getElementById('navMobileMenu');
-      if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
-        btn.classList.remove('open');
-        menu.classList.remove('open');
-      }
-    });
-  </script>
+<script>
+function toggleMenu() {
+  var btn = document.getElementById('navHamburger');
+  var menu = document.getElementById('navMobileMenu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var btn = document.getElementById('navHamburger');
+  var menu = document.getElementById('navMobileMenu');
+  if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+    btn.classList.remove('open');
+    menu.classList.remove('open');
+  }
+});
+function toggleFaq(el) {
+  var item = el.parentElement;
+  item.classList.toggle('open');
+}
+function scrollToSection(id, btn) {
+  document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  var el = document.getElementById(id);
+  if (el) { var top = el.getBoundingClientRect().top + window.pageYOffset - 110; window.scrollTo({top: top, behavior: 'smooth'}); }
+}
+// Reveal on scroll
+var reveals = document.querySelectorAll('.reveal');
+function checkReveal() {
+  reveals.forEach(function(el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', checkReveal);
+checkReveal();
+</script>
 </body>
 </html>
