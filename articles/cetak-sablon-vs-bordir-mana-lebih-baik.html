@@ -13,216 +13,39 @@
   <link rel="canonical" href="https://pauskonveksi.com/articles/cetak-sablon-vs-bordir-mana-lebih-baik.html" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .article-hero {
-      background: linear-gradient(135deg, #0a2540 0%, #1a4a8a 100%);
-      color: #fff;
-      padding: 80px 20px 60px;
-      text-align: center;
-    }
-    .article-hero .category-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #fff;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .article-hero h1 {
-      font-size: clamp(1.6rem, 4vw, 2.5rem);
-      font-weight: 800;
-      margin: 0 auto 16px;
-      max-width: 800px;
-      line-height: 1.3;
-    }
-    .article-meta {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-    .article-body {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #333;
-    }
-    .article-body h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #0a2540;
-      margin: 40px 0 16px;
-      border-left: 4px solid #1a4a8a;
-      padding-left: 14px;
-    }
-    .article-body h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #1a4a8a;
-      margin: 28px 0 12px;
-    }
-    .article-body p {
-      margin-bottom: 20px;
-    }
-    .article-body ul, .article-body ol {
-      margin: 16px 0 20px 24px;
-    }
-    .article-body li {
-      margin-bottom: 8px;
-    }
-    .article-body .highlight-box {
-      background: #f0f6ff;
-      border-left: 4px solid #1a4a8a;
-      padding: 20px 24px;
-      border-radius: 0 8px 8px 0;
-      margin: 28px 0;
-    }
-    .article-body .highlight-box p {
-      margin: 0;
-      color: #0a2540;
-      font-weight: 500;
-    }
-    .cta-section {
-      background: linear-gradient(135deg, #0a2540 0%, #1a4a8a 100%);
-      color: #fff;
-      padding: 60px 24px;
-      text-align: center;
-    }
-    .cta-section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-    }
-    .cta-section p {
-      opacity: 0.9;
-      max-width: 500px;
-      margin: 0 auto 28px;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: #25D366;
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #1a4a8a;
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 32px;
-      font-size: 0.95rem;
-    }
-    .back-link:hover { color: #0a2540; }
+    .article-hero { background: linear-gradient(135deg, #0a2540 0%, #1a4a8a 100%); color: #fff; padding: 80px 20px 60px; text-align: center; }
+    .article-hero .category-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px; }
+    .article-hero h1 { font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 800; margin: 0 auto 16px; max-width: 800px; line-height: 1.3; }
+    .article-meta { font-size: 0.9rem; opacity: 0.8; }
+    .article-body { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; font-size: 1.05rem; line-height: 1.8; color: #333; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 700; color: #0a2540; margin: 40px 0 16px; border-left: 4px solid #1a4a8a; padding-left: 14px; }
+    .article-body h3 { font-size: 1.2rem; font-weight: 700; color: #1a4a8a; margin: 28px 0 12px; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body ul, .article-body ol { margin: 16px 0 20px 24px; }
+    .article-body li { margin-bottom: 8px; }
+    .highlight-box { background: #f0f6ff; border-left: 4px solid #1a4a8a; padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 28px 0; }
+    .highlight-box p { margin: 0; color: #0a2540; font-weight: 500; }
+    .cta-section { background: linear-gradient(135deg, #0a2540 0%, #1a4a8a 100%); color: #fff; padding: 60px 24px; text-align: center; }
+    .cta-section h2 { font-size: 1.8rem; margin-bottom: 16px; }
+    .cta-section p { opacity: 0.9; max-width: 500px; margin: 0 auto 28px; }
+    .cta-btn { display: inline-block; background: #25D366; color: #fff; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 1rem; text-decoration: none; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: #1a4a8a; text-decoration: none; font-weight: 600; margin-bottom: 32px; font-size: 0.95rem; }
   </style>
 </head>
 <body>
-
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="../index.html" class="nav-logo">
-      <span class="logo-icon">🐋</span>
-      <span class="logo-text">Paus <span class="logo-accent">Konveksi</span></span>
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html">Beranda</a></li>
-      <li><a href="../katalog.html">Katalog</a></li>
-      <li><a href="../about.html">Tentang Kami</a></li>
-      <li><a href="../blog.html" class="active">Blog</a></li>
-      <li><a href="../faq.html">FAQ</a></li>
-      <li><a href="https://wa.me/6281234567890" class="nav-cta" target="_blank">Konsultasi Gratis</a></li>
-    </ul>
-  </div>
-</nav>
-
-<section class="article-hero">
-  <span class="category-badge">Teknik Produksi</span>
-  <h1>Cetak Sablon vs Bordir: Mana yang Lebih Baik untuk Seragam Anda?</h1>
-  <div class="article-meta">
-    <span>📅 25 Feb 2025</span>
-    &nbsp;·&nbsp;
-    <span>⏱ 6 menit baca</span>
-    &nbsp;·&nbsp;
-    <span>✍️ Tim Paus Konveksi</span>
-  </div>
-</section>
-
-<div class="article-body">
-  <a href="../blog.html" class="back-link">← Kembali ke Blog</a>
-  
-<p>Ketika memesan seragam atau merchandise, salah satu keputusan terpenting adalah memilih antara sablon dan bordir untuk logo atau desain Anda. Keduanya memiliki kelebihan dan keterbatasan yang berbeda. Berikut panduan perbandingannya.</p>
-
+<nav class="navbar"><div class="nav-container"><a href="../index.html" class="nav-logo"><span class="logo-icon">🐋</span><span class="logo-text">Paus <span class="logo-accent">Konveksi</span></span></a><button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button><ul class="nav-links" id="navLinks"><li><a href="../index.html">Beranda</a></li><li><a href="../katalog.html">Katalog</a></li><li><a href="../about.html">Tentang Kami</a></li><li><a href="../blog.html" class="active">Blog</a></li><li><a href="../faq.html">FAQ</a></li><li><a href="https://wa.me/6281234567890" class="nav-cta" target="_blank">Konsultasi Gratis</a></li></ul></div></nav>
+<section class="article-hero"><span class="category-badge">Teknik Produksi</span><h1>Cetak Sablon vs Bordir: Mana yang Lebih Baik untuk Seragam Anda?</h1><div class="article-meta"><span>📅 25 Feb 2025</span>&nbsp;·&nbsp;<span>⏱ 6 menit baca</span>&nbsp;·&nbsp;<span>✍️ Tim Paus Konveksi</span></div></section>
+<div class="article-body"><a href="../blog.html" class="back-link">← Kembali ke Blog</a>
+<p>Ketika memesan seragam atau merchandise, salah satu keputusan terpenting adalah memilih antara sablon dan bordir untuk logo atau desain Anda. Keduanya memiliki kelebihan dan keterbatasan yang berbeda.</p>
 <h2>Sablon: Kelebihan dan Keterbatasan</h2>
-
-<h3>Kelebihan Sablon</h3>
-<ul>
-  <li><strong>Lebih murah untuk desain besar dan kompleks:</strong> Sablon lebih cost-effective untuk desain yang mencakup area luas atau menggunakan banyak warna dalam gradasi</li>
-  <li><strong>Cocok untuk desain detail dan foto:</strong> Teknik seperti DTG atau sublimasi bisa mereproduksi foto dan gradasi dengan sempurna</li>
-  <li><strong>Hasil rata dan flat:</strong> Permukaan sablon rata, cocok untuk desain yang ingin terlihat "bagian dari kain"</li>
-  <li><strong>MOQ lebih fleksibel:</strong> Untuk teknik DTG, tidak ada minimum order</li>
-</ul>
-
-<h3>Keterbatasan Sablon</h3>
-<ul>
-  <li>Bisa retak atau mengelupas jika tidak dirawat dengan baik</li>
-  <li>Tidak terasa se-premium bordir untuk polo shirt atau kemeja formal</li>
-  <li>Warna pada kain sangat gelap bisa lebih sulit dieksekusi</li>
-</ul>
-
+<ul><li><strong>Lebih murah untuk desain besar</strong>: Sablon lebih cost-effective untuk desain area luas</li><li><strong>Cocok desain detail dan foto</strong>: DTG/Sublimasi bisa reproduksi foto dan gradasi</li><li><strong>MOQ fleksibel</strong>: Untuk DTG, tidak ada minimum order</li></ul>
 <h2>Bordir: Kelebihan dan Keterbatasan</h2>
-
-<h3>Kelebihan Bordir</h3>
-<ul>
-  <li><strong>Kesan premium dan profesional:</strong> Bordir memberikan dimensi tiga dimensi yang terlihat dan terasa lebih berkelas</li>
-  <li><strong>Sangat tahan lama:</strong> Bordir benang berkualitas bisa bertahan selama usia pakaian, tidak akan retak atau pudar</li>
-  <li><strong>Cocok untuk polo, kemeja, topi:</strong> Bordir adalah standar industri untuk pakaian formal dan semi-formal</li>
-</ul>
-
-<h3>Keterbatasan Bordir</h3>
-<ul>
-  <li>Lebih mahal untuk desain yang membutuhkan banyak detail halus</li>
-  <li>Tidak ideal untuk desain dengan gradasi warna atau foto-realistis</li>
-  <li>Desain yang terlalu kecil atau terlalu detail tidak bisa dieksekusi dengan baik via bordir</li>
-</ul>
-
-<h2>Panduan Rekomendasi</h2>
-
-<div class="highlight-box">
-<p>✅ <strong>Pilih Bordir untuk:</strong><br>Polo shirt kantor, kemeja perusahaan, topi, dan seragam formal<br>Logo dengan ukuran kecil-menengah (4–10 cm) tanpa banyak gradasi</p>
+<ul><li><strong>Kesan premium</strong>: Bordir memberikan dimensi 3D yang terasa lebih berkelas</li><li><strong>Sangat tahan lama</strong>: Benang bordir berkualitas bisa bertahan selama usia pakaian</li></ul>
+<div class="highlight-box"><p>✅ <strong>Pilih Bordir untuk:</strong> Polo shirt kantor, kemeja perusahaan, topi, dan seragam formal</p></div>
+<div class="highlight-box"><p>✅ <strong>Pilih Sablon untuk:</strong> Kaos event dan merchandise massal, desain besar atau banyak warna</p></div>
+<p>Keduanya bisa kombinasikan: bordir untuk logo dada kiri, sablon untuk desain punggung.</p>
 </div>
-
-<div class="highlight-box">
-<p>✅ <strong>Pilih Sablon untuk:</strong><br>Kaos event dan merchandise massal<br>Desain besar (punggung penuh) atau desain dengan banyak warna/gradasi<br>Budget yang lebih terbatas</p>
-</div>
-
-<h2>Bisa Kombinasikan Keduanya?</h2>
-<p>Ya, dan ini sering memberikan hasil terbaik! Banyak seragam menggunakan bordir untuk logo utama di dada kiri (premium, tahan lama) dan sablon untuk desain tambahan di punggung atau lengan (fleksibel, bisa kompleks). Kombinasi ini memaksimalkan kelebihan keduanya.</p>
-
-<h2>Kesimpulan</h2>
-<p>Tidak ada jawaban universal — pilihan tergantung pada jenis pakaian, desain, budget, dan kesan yang ingin Anda ciptakan. Vendor konveksi yang baik akan merekomendasikan teknik yang paling sesuai setelah melihat desain Anda secara langsung.</p>
-</div>
-
-<section class="cta-section">
-  <h2>Siap Produksi Seragam Berkualitas?</h2>
-  <p>Konsultasikan kebutuhan konveksi Anda dengan tim kami sekarang. Gratis, tanpa tekanan.</p>
-  <a href="https://wa.me/6281234567890?text=Halo%20Paus%20Konveksi%2C%20saya%20ingin%20konsultasi%20pembuatan%20seragam" class="cta-btn" target="_blank">
-    💬 Chat WhatsApp Sekarang
-  </a>
-</section>
-<footer class="footer"><div class="footer-container"><div class="footer-brand"><a href="../index.html" class="footer-logo">🐋 Paus Konveksi</a><p>Solusi konveksi terpercaya untuk kebutuhan seragam, kaos, jaket, tas, dan merchandise kustom Anda.</p></div><div class="footer-links"><h4>Navigasi</h4><ul><li><a href="../index.html">Beranda</a></li><li><a href="../katalog.html">Katalog</a></li><li><a href="../about.html">Tentang Kami</a></li><li><a href="../blog.html">Blog</a></li><li><a href="../faq.html">FAQ</a></li></ul></div><div class="footer-contact"><h4>Kontak</h4><p>📱 WhatsApp: <a href="https://wa.me/6281234567890">+62 812-3456-7890</a></p><p>📧 Email: info@pauskonveksi.com</p><p>📍 Jakarta, Indonesia</p></div></div><div class="footer-bottom"><p>© 2025 Paus Konveksi. All rights reserved.</p></div></footer><script>const hamburger=document.getElementById('hamburger');const navLinks=document.getElementById('navLinks');hamburger.addEventListener('click',()=>{const isOpen=navLinks.classList.toggle('open');hamburger.classList.toggle('open',isOpen);hamburger.setAttribute('aria-expanded',isOpen);});document.querySelectorAll('.nav-links a').forEach(link=>{link.addEventListener('click',()=>{navLinks.classList.remove('open');hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');});});</script></body></html>
+<section class="cta-section"><h2>Siap Produksi Seragam Berkualitas?</h2><p>Konsultasikan kebutuhan konveksi Anda dengan tim kami sekarang. Gratis, tanpa tekanan.</p><a href="https://wa.me/6281234567890?text=Halo%20Paus%20Konveksi%2C%20saya%20ingin%20konsultasi%20pembuatan%20seragam" class="cta-btn" target="_blank">💬 Chat WhatsApp Sekarang</a></section>
+<footer class="footer"><div class="footer-bottom"><p>© 2025 Paus Konveksi. All rights reserved.</p></div></footer>
+<script>const hamburger=document.getElementById('hamburger');const navLinks=document.getElementById('navLinks');hamburger.addEventListener('click',()=>{const isOpen=navLinks.classList.toggle('open');hamburger.classList.toggle('open',isOpen);hamburger.setAttribute('aria-expanded',isOpen);});</script>
+</body></html>
