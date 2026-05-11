@@ -321,7 +321,7 @@
     background: rgba(245,240,232,0.08);
   }
   .service-card {
-    background: var(--white);
+    background: var(--navy-mid);
     padding: 2.5rem 2rem;
     position: relative;
     overflow: hidden;
@@ -336,15 +336,12 @@
     background: var(--gold);
     transition: width 0.4s ease;
   }
-  .service-card:hover { background: var(--navy); }
-  .service-card:hover .service-name { color: var(--white); }
-  .service-card:hover .service-desc { color: rgba(245,240,232,0.6); }
-  .service-card:hover .service-num { color: rgba(200,146,58,0.2); }
+  .service-card:hover { background: var(--navy-light); }
   .service-card:hover::after { width: 100%; }
   .service-num {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--cream-dark);
+    color: rgba(245,240,232,0.35);
     letter-spacing: 0.1em;
     margin-bottom: 1.5rem;
     transition: color 0.3s;
@@ -358,14 +355,14 @@
     font-family: var(--font-display);
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--white);
     margin-bottom: 0.75rem;
     transition: color 0.3s;
   }
   .service-desc {
     font-size: 0.85rem;
     line-height: 1.6;
-    color: rgba(13,27,42,0.55);
+    color: rgba(245,240,232,0.6);
     transition: color 0.3s;
   }
 
@@ -383,31 +380,58 @@
     line-height: 1.7;
     opacity: 0.6;
   }
-  .clients-logo-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.5px;
-    background: rgba(245,240,232,0.05);
+  .clients-marquee {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
   }
-  .client-logo-cell {
-    background: var(--navy-mid);
-    padding: 1.5rem;
+  .clients-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: clientsScroll 90s linear infinite;
+  }
+  .clients-marquee:hover .clients-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes clientsScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .client-logo {
+    flex-shrink: 0;
+    width: 180px;
+    height: 90px;
+    margin: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--cream);
-    opacity: 0.35;
-    text-align: center;
-    letter-spacing: 0.05em;
-    line-height: 1.3;
-    transition: opacity 0.2s;
-    min-height: 70px;
   }
-  .client-logo-cell:hover { opacity: 0.85; }
-  .client-logo-cell.featured { opacity: 0.65; color: var(--gold-light); }
+  .client-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .clients-marquee::before,
+  .clients-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .clients-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--navy-mid), transparent);
+  }
+  .clients-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--navy-mid), transparent);
+  }
 
   /* ── PROCESS ── */
   #process { background: var(--navy); }
@@ -960,7 +984,7 @@
     .hero-right { height: 50vh; }
     .hero-left { padding: 8rem 1.5rem 3rem; }
     .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .clients-logo-grid { grid-template-columns: repeat(4, 1fr); }
+    .client-logo { width: 140px; height: 70px; margin: 0 1rem; }
     .process-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .process-grid::before { display: none; }
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1293,19 +1317,73 @@
     </div>
     <p class="clients-desc">Dari BUMN hingga startup, dari perusahaan multinasional hingga brand lokal — kami telah melayani ratusan klien di seluruh Indonesia dengan hasil yang memuaskan.</p>
   </div>
-  <div class="clients-logo-grid reveal">
-    <div class="client-logo-cell featured">Bank Indonesia</div>
-    <div class="client-logo-cell featured">FamilyMart</div>
-    <div class="client-logo-cell featured">Electronic City</div>
-    <div class="client-logo-cell featured">Freeport Indonesia</div>
-    <div class="client-logo-cell">Morgen</div>
-    <div class="client-logo-cell">Neveres Sportswear</div>
-    <div class="client-logo-cell">PAOL Promotions</div>
-    <div class="client-logo-cell">IN2CYBER</div>
-    <div class="client-logo-cell">TECNO Mobile</div>
-    <div class="client-logo-cell">UHUD Outdoor</div>
-    <div class="client-logo-cell">BI Institute</div>
-    <div class="client-logo-cell">+ 90 Lainnya</div>
+  <div class="clients-marquee reveal">
+    <div class="clients-marquee-track">
+      <!-- Set 1 -->
+      <div class="client-logo"><img src="images/clients/samsung.png" alt="Samsung"></div>
+      <div class="client-logo"><img src="images/clients/pertamina.png" alt="Pertamina"></div>
+      <div class="client-logo"><img src="images/clients/bayer.png" alt="Bayer"></div>
+      <div class="client-logo"><img src="images/clients/total.png" alt="Total"></div>
+      <div class="client-logo"><img src="images/clients/exxonmobil.png" alt="ExxonMobil"></div>
+      <div class="client-logo"><img src="images/clients/lazada.png" alt="Lazada"></div>
+      <div class="client-logo"><img src="images/clients/shopee.png" alt="Shopee"></div>
+      <div class="client-logo"><img src="images/clients/goto.png" alt="GoTo"></div>
+      <div class="client-logo"><img src="images/clients/lenovo.png" alt="Lenovo"></div>
+      <div class="client-logo"><img src="images/clients/dell.png" alt="Dell"></div>
+      <div class="client-logo"><img src="images/clients/acer.png" alt="Acer"></div>
+      <div class="client-logo"><img src="images/clients/asus.png" alt="Asus"></div>
+      <div class="client-logo"><img src="images/clients/sharp.png" alt="Sharp"></div>
+      <div class="client-logo"><img src="images/clients/gramedia.png" alt="Gramedia"></div>
+      <div class="client-logo"><img src="images/clients/paspampres.png" alt="Paspampres"></div>
+      <div class="client-logo"><img src="images/clients/tzuchi.png" alt="Tzu Chi"></div>
+      <div class="client-logo"><img src="images/clients/inalum.png" alt="Inalum"></div>
+      <div class="client-logo"><img src="images/clients/samudera.png" alt="Samudera"></div>
+      <div class="client-logo"><img src="images/clients/panorama.png" alt="Panorama JTB"></div>
+      <div class="client-logo"><img src="images/clients/golden-rama.png" alt="Golden Rama"></div>
+      <div class="client-logo"><img src="images/clients/celebrity-fitness.png" alt="Celebrity Fitness"></div>
+      <div class="client-logo"><img src="images/clients/golds-gym.png" alt="Gold's Gym"></div>
+      <div class="client-logo"><img src="images/clients/dynabook.png" alt="Dynabook"></div>
+      <div class="client-logo"><img src="images/clients/axioo.png" alt="Axioo"></div>
+      <div class="client-logo"><img src="images/clients/mitsuboshi.png" alt="Mitsuboshi"></div>
+      <div class="client-logo"><img src="images/clients/toyoplas.png" alt="Toyoplas"></div>
+      <div class="client-logo"><img src="images/clients/john-crane.png" alt="John Crane"></div>
+      <div class="client-logo"><img src="images/clients/actavis.png" alt="Actavis"></div>
+      <div class="client-logo"><img src="images/clients/phapros.png" alt="Phapros"></div>
+      <div class="client-logo"><img src="images/clients/drs-secret.png" alt="Dr's Secret"></div>
+      <div class="client-logo"><img src="images/clients/aha-center.png" alt="AHA Center"></div>
+      <!-- Set 2 (duplicate untuk infinite loop seamless) -->
+      <div class="client-logo"><img src="images/clients/samsung.png" alt="Samsung"></div>
+      <div class="client-logo"><img src="images/clients/pertamina.png" alt="Pertamina"></div>
+      <div class="client-logo"><img src="images/clients/bayer.png" alt="Bayer"></div>
+      <div class="client-logo"><img src="images/clients/total.png" alt="Total"></div>
+      <div class="client-logo"><img src="images/clients/exxonmobil.png" alt="ExxonMobil"></div>
+      <div class="client-logo"><img src="images/clients/lazada.png" alt="Lazada"></div>
+      <div class="client-logo"><img src="images/clients/shopee.png" alt="Shopee"></div>
+      <div class="client-logo"><img src="images/clients/goto.png" alt="GoTo"></div>
+      <div class="client-logo"><img src="images/clients/lenovo.png" alt="Lenovo"></div>
+      <div class="client-logo"><img src="images/clients/dell.png" alt="Dell"></div>
+      <div class="client-logo"><img src="images/clients/acer.png" alt="Acer"></div>
+      <div class="client-logo"><img src="images/clients/asus.png" alt="Asus"></div>
+      <div class="client-logo"><img src="images/clients/sharp.png" alt="Sharp"></div>
+      <div class="client-logo"><img src="images/clients/gramedia.png" alt="Gramedia"></div>
+      <div class="client-logo"><img src="images/clients/paspampres.png" alt="Paspampres"></div>
+      <div class="client-logo"><img src="images/clients/tzuchi.png" alt="Tzu Chi"></div>
+      <div class="client-logo"><img src="images/clients/inalum.png" alt="Inalum"></div>
+      <div class="client-logo"><img src="images/clients/samudera.png" alt="Samudera"></div>
+      <div class="client-logo"><img src="images/clients/panorama.png" alt="Panorama JTB"></div>
+      <div class="client-logo"><img src="images/clients/golden-rama.png" alt="Golden Rama"></div>
+      <div class="client-logo"><img src="images/clients/celebrity-fitness.png" alt="Celebrity Fitness"></div>
+      <div class="client-logo"><img src="images/clients/golds-gym.png" alt="Gold's Gym"></div>
+      <div class="client-logo"><img src="images/clients/dynabook.png" alt="Dynabook"></div>
+      <div class="client-logo"><img src="images/clients/axioo.png" alt="Axioo"></div>
+      <div class="client-logo"><img src="images/clients/mitsuboshi.png" alt="Mitsuboshi"></div>
+      <div class="client-logo"><img src="images/clients/toyoplas.png" alt="Toyoplas"></div>
+      <div class="client-logo"><img src="images/clients/john-crane.png" alt="John Crane"></div>
+      <div class="client-logo"><img src="images/clients/actavis.png" alt="Actavis"></div>
+      <div class="client-logo"><img src="images/clients/phapros.png" alt="Phapros"></div>
+      <div class="client-logo"><img src="images/clients/drs-secret.png" alt="Dr's Secret"></div>
+      <div class="client-logo"><img src="images/clients/aha-center.png" alt="AHA Center"></div>
+    </div>
   </div>
 </section>
 
