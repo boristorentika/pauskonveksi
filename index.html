@@ -1091,6 +1091,29 @@
   gtag('js', new Date());
   gtag('config', 'G-CNR215CS7G');
 </script>
+<!-- WhatsApp Click Tracker -->
+<script>
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="wa.me/"]');
+    if (!link) return;
+    // Identify lokasi klik: cari class/section terdekat
+    var location = 'unknown';
+    if (link.closest('nav')) location = 'nav';
+    else if (link.closest('footer')) location = 'footer';
+    else if (link.closest('#categories') || link.closest('.category-card')) location = 'katalog_kategori';
+    else if (link.closest('#cta-katalog') || link.closest('.btn-wa-big')) location = 'katalog_cta';
+    else if (link.closest('#hero')) location = 'hero';
+    else if (link.closest('.nav-mobile-menu')) location = 'mobile_menu';
+    else location = 'body';
+    if (typeof gtag === 'function') {
+      gtag('event', 'whatsapp_click', {
+        'location': location,
+        'page_path': window.location.pathname,
+        'link_url': link.href
+      });
+    }
+  });
+</script>
 </head>
 <body>
 
